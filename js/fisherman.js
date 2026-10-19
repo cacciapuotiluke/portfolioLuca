@@ -53,25 +53,25 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const idleFrames = [
-        "Assets/Pescatore/Fish_Idle/FishIdle01.png",
-        "Assets/Pescatore/Fish_Idle/FishIdle02.png",
-        "Assets/Pescatore/Fish_Idle/FishIdle03.png",
-        "Assets/Pescatore/Fish_Idle/FishIdle04.png"
+        "assets/Pescatore/Fish_Idle/FishIdle01.png",
+        "assets/Pescatore/Fish_Idle/FishIdle02.png",
+        "assets/Pescatore/Fish_Idle/FishIdle03.png",
+        "assets/Pescatore/Fish_Idle/FishIdle04.png"
     ];
 
     const projectFrames = [
-        "Assets/Pescatore/Fish_Project/FishProject01.png",
-        "Assets/Pescatore/Fish_Project/FishProject02.png",
-        "Assets/Pescatore/Fish_Project/FishProject03.png",
-        "Assets/Pescatore/Fish_Project/FishProject04.png",
-        "Assets/Pescatore/Fish_Project/FishProject05.png",
-        "Assets/Pescatore/Fish_Project/FishProject06.png"
+        "assets/Pescatore/Fish_Project/FishProject01.png",
+        "assets/Pescatore/Fish_Project/FishProject02.png",
+        "assets/Pescatore/Fish_Project/FishProject03.png",
+        "assets/Pescatore/Fish_Project/FishProject04.png",
+        "assets/Pescatore/Fish_Project/FishProject05.png",
+        "assets/Pescatore/Fish_Project/FishProject06.png"
     ];
 
     const scrollFrames = Array.from(
         { length: 130 },
         (_, index) =>
-            `Assets/Pescatore/Fish_Scroll/FishScroll${String(index + 1).padStart(2, "0")}.png`
+            `assets/Pescatore/Fish_Scroll/FishScroll${String(index + 1).padStart(2, "0")}.png`
     );
 
     const idleFrameDuration = 1000 / 8;
