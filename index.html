@@ -1,0 +1,773 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* =========================
+           ABOUT ME - ICONA
+        ========================= */
+
+        .name-stack {
+            position: relative;
+        }
+
+        .about-me-button {
+            position: absolute;
+            left: calc(83% + var(--about-me-offset, 30px));
+            top: 112%;
+            width: clamp(55px, 7vw, 100px);
+            aspect-ratio: 1;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            cursor: pointer;
+            z-index: 20;
+
+            opacity: 0;
+            animation:
+                aboutMeEntrance 0.7s ease 1.2s forwards,
+                aboutMeWiggle 2.4s ease-in-out 1.2s infinite alternate;
+
+            transform-origin: center;
+            scale: 1;
+            transition: scale 0.25s ease;
+        }
+
+        .about-me-button:hover {
+            scale: 1.1;
+        }
+
+        .about-me-button img {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 170%;
+            height: 170%;
+            object-fit: contain;
+            pointer-events: none;
+        }
+
+        .about-me-button .about-frame-2,
+        .about-me-button .about-frame-3 {
+            opacity: 0;
+        }
+
+        @keyframes aboutMeEntrance {
+            from {
+                opacity: 0;
+                translate: 0 20px;
+            }
+            to {
+                opacity: 1;
+                translate: 0 0;
+            }
+        }
+
+        @keyframes aboutMeWiggle {
+            from { rotate: -4deg; }
+            to { rotate: 4deg; }
+        }
+
+
+        /* =========================
+           ABOUT ME - OVERLAY
+        ========================= */
+
+        .about-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 99999;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-sizing: border-box;
+            padding: 30px;
+
+            background: rgba(12, 24, 35, 0.72);
+            backdrop-filter: blur(7px);
+            -webkit-backdrop-filter: blur(7px);
+
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+
+            transition:
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+        }
+
+        .about-overlay.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        .about-panel {
+            position: relative;
+
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+            align-items: center;
+            gap: clamp(30px, 5vw, 80px);
+
+            box-sizing: border-box;
+            width: min(100%, 1050px);
+            max-height: 85vh;
+            overflow-y: auto;
+
+            padding: clamp(30px, 5vw, 70px);
+
+            background: #f3f0e8;
+            color: #202020;
+            border-radius: 4px;
+
+            transform: translateY(25px) scale(0.97);
+            transition: transform 0.4s cubic-bezier(.2, .8, .2, 1);
+        }
+
+        .about-overlay.is-open .about-panel {
+            transform: translateY(0) scale(1);
+        }
+
+
+        /* Pulsante di chiusura */
+
+        .about-close {
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            z-index: 10;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 42px;
+            height: 42px;
+            padding: 0;
+
+            border: none;
+            background: transparent;
+            color: inherit;
+
+            font: inherit;
+            font-size: 34px;
+            line-height: 1;
+
+            cursor: pointer;
+            transition: rotate 0.25s ease, scale 0.25s ease;
+        }
+
+        .about-close:hover {
+            rotate: 90deg;
+            scale: 1.1;
+        }
+
+
+        /* Testo */
+
+        .about-copy {
+            position: relative;
+            z-index: 2;
+            min-width: 0;
+        }
+
+        .about-copy .about-eyebrow {
+            margin: 0 0 15px;
+            font-size: 12px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .about-copy h2 {
+            margin: 0 0 25px;
+            font-size: clamp(36px, 5vw, 64px);
+            line-height: 0.95;
+            letter-spacing: -0.06em;
+        }
+
+        .about-copy p {
+            max-width: 440px;
+            margin: 0 0 16px;
+            font-size: clamp(14px, 1.2vw, 17px);
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           FOTO - CERCHI SOVRAPPOSTI
+        ========================= */
+
+        .about-photos {
+            position: relative;
+            display: block;
+            width: 100%;
+            max-width: 390px;
+            aspect-ratio: 1;
+            justify-self: center;
+            min-width: 0;
+            overflow: visible;
+        }
+
+        .about-photo-card {
+            position: absolute;
+            box-sizing: border-box;
+
+            width: 62%;
+            aspect-ratio: 1;
+            padding: 0;
+
+            border-radius: 50%;
+            overflow: hidden;
+            background: #fffdf4;
+
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.2);
+
+            transition:
+                transform 0.35s ease,
+                box-shadow 0.35s ease;
+        }
+
+        /* Immagini centrate rispetto ai rispettivi cerchi */
+
+        .about-photo-card img {
+            position: absolute !important;
+
+            top: 50% !important;
+            left: 50% !important;
+            right: auto !important;
+            bottom: auto !important;
+
+            display: block !important;
+            width: 130% !important;
+            height: 130% !important;
+
+            max-width: none !important;
+            max-height: none !important;
+
+            margin: 0 !important;
+            padding: 0 !important;
+            border: 0 !important;
+
+            border-radius: 0;
+            object-fit: cover !important;
+            object-position: center;
+
+            transform: translate(-50%, -50%) !important;
+
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
+        /* Abbassa il contenuto del primo cerchio */
+
+        .about-photo-1 img {
+            top: calc(60% + 10px) !important;
+        }
+
+        /* Posizione dei tre cerchi */
+
+        .about-photo-1 {
+            top: -20%;
+            left: -10%;
+            rotate: -8deg;
+            z-index: 1;
+        }
+
+        .about-photo-2 {
+            top: 8%;
+            left: 49%;
+            rotate: 6deg;
+            z-index: 3;
+        }
+
+        .about-photo-3 {
+            top: 58%;
+            left: 4%;
+            rotate: -3deg;
+            z-index: 2;
+        }
+
+        /* Movimento al passaggio del cursore */
+
+        .about-photos:hover .about-photo-1 {
+            transform: translate(-5px, -5px);
+        }
+
+        .about-photos:hover .about-photo-2 {
+            transform: translate(5px, -3px);
+        }
+
+        .about-photos:hover .about-photo-3 {
+            transform: translate(0, 5px);
+        }
+
+
+        /* =========================
+           LAYOUT MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+            .about-overlay {
+                padding: 16px;
+            }
+
+            .about-panel {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 20px;
+
+                width: 100%;
+                max-height: 90vh;
+
+                padding: 55px 25px 25px;
+            }
+
+            .about-copy h2 {
+                font-size: clamp(36px, 10vw, 52px);
+            }
+
+            .about-copy p {
+                font-size: 14px;
+            }
+
+            .about-photos {
+                width: min(130%, 300px);
+                height: auto;
+                aspect-ratio: 1;
+                margin: 5px auto 0;
+            }
+
+            .about-photo-card {
+                width: 62%;
+                height: auto;
+                aspect-ratio: 1;
+                padding: 0;
+                overflow: hidden;
+                border-radius: 50%;
+            }
+
+            .about-photo-card img {
+                top: 50% !important;
+                left: 50% !important;
+                right: auto !important;
+                bottom: auto !important;
+
+                width: 100% !important;
+                height: 100% !important;
+
+                transform: translate(-50%, -50%) !important;
+            }
+
+            /* Mantiene lo spostamento verticale anche su mobile */
+
+            .about-photo-1 img {
+                top: calc(50% + 10px) !important;
+            }
+        }
+
+
+        /* Rispetta le preferenze di chi riduce le animazioni */
+
+        @media (prefers-reduced-motion: reduce) {
+            .about-me-button {
+                animation: none;
+                opacity: 1;
+                rotate: 0deg;
+            }
+
+            .about-me-button:hover {
+                scale: 1;
+            }
+
+            .about-overlay,
+            .about-panel,
+            .about-close,
+            .about-photo-card {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="camera">
+        <div id="scene">
+
+            <div class="circles-background" aria-hidden="true">
+                <div class="circle-entry entry-large">
+                    <div class="circle circle-large"></div>
+                </div>
+                <div class="circle-entry entry-medium">
+                    <div class="circle circle-medium"></div>
+                </div>
+                <div class="circle-entry entry-small">
+                    <div class="circle circle-small"></div>
+                </div>
+            </div>
+
+            <main class="hero">
+
+                <div class="name-stack">
+                    <h1 class="original-name">LUCA<br>CACCIAPUOTI</h1>
+                    <span class="name-copy copy-3">LUCA<br>CACCIAPUOTI</span>
+                    <span class="name-copy copy-4">LUCA<br>CACCIAPUOTI</span>
+
+                    <!-- Personaggio -->
+                    <div id="character" aria-hidden="true">
+
+                        <div class="part leg-left-upper">
+                            <img src="assets/CH/Up_Leg_SX.png" alt="">
+                            <div class="part leg-left-lower">
+                                <img src="assets/CH/Low_Leg_SX.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="part leg-right-upper">
+                            <img src="assets/CH/Up_Leg_DX.png" alt="">
+                            <div class="part leg-right-lower">
+                                <img src="assets/CH/Low_Leg_DX.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="part torso">
+                            <img src="assets/CH/torso.png" alt="">
+                        </div>
+
+                        <div class="part arm-left-upper">
+                            <img src="assets/CH/Up_Arm_SX.png" alt="">
+                            <div class="part arm-left-lower">
+                                <img src="assets/CH/Low_Arm_SX.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="part arm-right-upper">
+                            <img src="assets/CH/Up_Arm_DX.png" alt="">
+                            <div class="part arm-right-lower">
+                                <img src="assets/CH/Low_Arm_DX.png" alt="">
+                            </div>
+                        </div>
+
+                        <div class="part head head-idle">
+                            <img src="assets/CH/head_idle.png" alt="">
+                        </div>
+
+                        <div class="part head head-moving">
+                            <img src="assets/CH/head_moving.png" alt="">
+                        </div>
+                    </div>
+
+                    <!-- Icona animata About Me -->
+                    <button
+                        class="about-me-button"
+                        id="about-me-trigger"
+                        type="button"
+                        aria-label="About Me"
+                        title="About Me"
+                        aria-haspopup="dialog"
+                        aria-controls="about-overlay"
+                        aria-expanded="false"
+                    >
+                        <img src="images/AboutMe-1.png" alt="" class="about-frame-1">
+                        <img src="images/AboutMe-2.png" alt="" class="about-frame-2">
+                        <img src="images/AboutMe-3.png" alt="" class="about-frame-3">
+                    </button>
+                </div>
+
+                <div class="scroll-prompt">
+                    <img src="Assets/Scroll/Frame_1.png" alt="" class="scroll-frame frame-one">
+                    <img src="Assets/Scroll/Frame_2.png" alt="" class="scroll-frame frame-two">
+                </div>
+
+                <p class="tagline">I make drawings do stuff</p>
+            </main>
+
+        </div>
+    </div>
+
+    <nav class="navigation">
+        <a href="index.html">HOME</a>
+        <a href="works.html">WORKS</a>
+        <a href="contact.html">CONTACT ME</a>
+    </nav>
+
+
+    <!-- =========================
+         OVERLAY ABOUT ME
+    ========================= -->
+
+    <div
+        class="about-overlay"
+        id="about-overlay"
+        aria-hidden="true"
+        inert
+    >
+        <section
+            class="about-panel"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="about-title"
+        >
+            <button
+                class="about-close"
+                id="about-close"
+                type="button"
+                aria-label="Close About Me"
+            >&times;</button>
+
+            <div class="about-copy">
+                <p class="about-eyebrow">A brief introduction</p>
+
+                <h2 id="about-title">Hey there! I'm<br>Luca.</h2>
+
+                <p>
+                    I'm an Italian 2D Animator and Storyboard Artist based in Milan.
+                </p>
+
+                <p>
+                    I graduated from NABA in 2025 with a degree in Cinema and Animation,
+                    where I learned how to draw characters and bring them to life through
+                    different animation techniques: paperless, traditional hand-drawn,
+                    cutout, and even stop-motion.
+                </p>
+
+                <p>
+                    I specialize in character animation, but I also work on storyboards
+                    and animatics, always putting storytelling and expressive action
+                    front and center.
+                </p>
+            </div>
+
+            <!-- Tre foto circolari sovrapposte -->
+            <div class="about-photos" aria-label="Photos of Luca">
+
+                <div class="about-photo-card about-photo-1">
+                    <img src="images/Me-1.jpeg" alt="Luca">
+                </div>
+
+                <div class="about-photo-card about-photo-2">
+                    <img src="images/Me-2.jpeg" alt="Luca">
+                </div>
+
+                <div class="about-photo-card about-photo-3">
+                    <img src="images/Me-3.jpeg" alt="Luca">
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+
+    <div id="custom-cursor" aria-hidden="true">✳</div>
+
+    <script src="js/character.js"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const rootStyle = getComputedStyle(document.documentElement);
+
+        /* Animazione dei cerchi */
+
+        const cerchi = [
+            {
+                elemento: document.querySelector(".circle-large"),
+                rotazione: "--restart-grande",
+                timer: "--timer-grande",
+                ritardo: "--ritardo-grande",
+                animazione: "rotateLarge"
+            },
+            {
+                elemento: document.querySelector(".circle-medium"),
+                rotazione: "--restart-medio",
+                timer: "--timer-medio",
+                ritardo: "--ritardo-medio",
+                animazione: "rotateMedium"
+            },
+            {
+                elemento: document.querySelector(".circle-small"),
+                rotazione: "--restart-piccolo",
+                timer: "--timer-piccolo",
+                ritardo: "--ritardo-piccolo",
+                animazione: "rotateSmall"
+            }
+        ];
+
+        const leggiMs = variabile => {
+            const valore = rootStyle
+                .getPropertyValue(variabile)
+                .trim();
+
+            const numero = parseFloat(valore);
+
+            if (!Number.isFinite(numero)) return 0;
+            if (valore.endsWith("ms")) return numero;
+            if (valore.endsWith("s")) return numero * 1000;
+
+            return 0;
+        };
+
+        cerchi.forEach(({
+            elemento,
+            rotazione,
+            timer,
+            ritardo,
+            animazione
+        }) => {
+            if (!elemento) return;
+
+            const durataRotazione = leggiMs(rotazione);
+            const intervalloRiavvio = leggiMs(timer);
+            const ritardoIniziale = leggiMs(ritardo);
+
+            if (durataRotazione <= 0 || intervalloRiavvio <= 0) {
+                return;
+            }
+
+            elemento.style.animation = "none";
+
+            setTimeout(() => {
+                const avviaRotazione = () => {
+                    elemento.style.animation = "none";
+                    void elemento.offsetWidth;
+
+                    elemento.style.animation =
+                        `${animazione} ${durataRotazione}ms linear infinite`;
+                };
+
+                avviaRotazione();
+                setInterval(avviaRotazione, intervalloRiavvio);
+            }, ritardoIniziale);
+        });
+
+
+        /* Animazione ciclica dell'icona About Me */
+
+        const aboutButton = document.querySelector("#about-me-trigger");
+
+        if (aboutButton) {
+            const frames = [
+                aboutButton.querySelector(".about-frame-1"),
+                aboutButton.querySelector(".about-frame-2"),
+                aboutButton.querySelector(".about-frame-3")
+            ];
+
+            let currentFrame = 0;
+
+            frames.forEach((frame, index) => {
+                if (frame) {
+                    frame.style.opacity = index === 0 ? "1" : "0";
+                }
+            });
+
+            setInterval(() => {
+                frames.forEach((frame, index) => {
+                    if (frame) {
+                        frame.style.opacity =
+                            index === currentFrame ? "1" : "0";
+                    }
+                });
+
+                currentFrame = (currentFrame + 1) % frames.length;
+            }, 150);
+        }
+
+
+        /* Apertura e chiusura dell'overlay */
+
+        const overlay = document.querySelector("#about-overlay");
+        const panel = overlay?.querySelector(".about-panel");
+        const closeButton = document.querySelector("#about-close");
+
+        if (aboutButton && overlay && panel && closeButton) {
+            let previousFocus = null;
+
+            const openOverlay = () => {
+                previousFocus = document.activeElement;
+
+                overlay.inert = false;
+                overlay.setAttribute("aria-hidden", "false");
+                overlay.classList.add("is-open");
+                aboutButton.setAttribute("aria-expanded", "true");
+
+                closeButton.focus();
+            };
+
+            const closeOverlay = () => {
+                if (!overlay.classList.contains("is-open")) return;
+
+                overlay.classList.remove("is-open");
+                overlay.setAttribute("aria-hidden", "true");
+                overlay.inert = true;
+                aboutButton.setAttribute("aria-expanded", "false");
+
+                if (previousFocus) {
+                    previousFocus.focus();
+                }
+            };
+
+            aboutButton.addEventListener("click", openOverlay);
+            closeButton.addEventListener("click", closeOverlay);
+
+            /* Chiude cliccando sullo sfondo */
+
+            overlay.addEventListener("click", event => {
+                if (event.target === overlay) {
+                    closeOverlay();
+                }
+            });
+
+            /* Chiude con Esc */
+
+            document.addEventListener("keydown", event => {
+                if (
+                    event.key === "Escape" &&
+                    overlay.classList.contains("is-open")
+                ) {
+                    closeOverlay();
+                }
+            });
+
+            /* Mantiene il focus all'interno della finestra */
+
+            overlay.addEventListener("keydown", event => {
+                if (event.key !== "Tab") return;
+
+                const focusable = [
+                    ...panel.querySelectorAll(
+                        'button, a[href], input, textarea, select, [tabindex]:not([tabindex="-1"])'
+                    )
+                ].filter(element => !element.disabled);
+
+                if (focusable.length === 0) return;
+
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+
+                if (event.shiftKey && document.activeElement === first) {
+                    event.preventDefault();
+                    last.focus();
+                } else if (
+                    !event.shiftKey &&
+                    document.activeElement === last
+                ) {
+                    event.preventDefault();
+                    first.focus();
+                }
+            });
+        }
+    });
+    </script>
+
+    <script src="click-sparks.js"></script>
+    <script src="./custom-cursor.js"></script>
+    <script src="js/camera.js"></script>
+
+</body>
+</html>

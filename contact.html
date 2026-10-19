@@ -1,0 +1,519 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact — Portfolio</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Notable&family=Kirang+Haerang&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #146a9c !important;
+            color: #f5f0df;
+            margin: 0;
+            min-height: 100vh;
+        }
+
+        /* Contenitore condiviso da titolo e scroll-prompt */
+        .contact-title-container {
+            position: absolute;
+            top: 15%;
+            left: 39%;
+            width: 100%;
+            transform: translate(-50%, -50%);
+            z-index: 5;
+        }
+
+        .contact-title {
+            position: relative;
+            margin: 0;
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            font-family: 'Notable', sans-serif;
+            font-size: clamp(54px, 16vw, 156px);
+            font-weight: 400;
+            line-height: 1.1;
+            color: #f5f0df;
+            text-align: center;
+        }
+
+        /* Scroll-prompt relativo al contenitore del titolo */
+        body:has(.contact-title-container) #contact-scroll-prompt {
+            position: absolute !important;
+            left: 58% !important;
+            top: 120% !important;
+            right: auto !important;
+            bottom: auto !important;
+            transform: translate(0, 0) !important;
+            animation: none !important;
+            opacity: 1 !important;
+        }
+
+        #phone-animation {
+            position: absolute;
+            top: 24%;
+            left: 48%;
+            width: 1700px;
+            height: auto;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        #phone-animation img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .contact-list {
+            position: absolute;
+            top: 41%;
+            left: 35%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+            width: fit-content;
+            max-width: calc(100% - 40px);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 70px;
+            color: #f5f0df;
+        }
+
+        .contact-item a {
+            display: flex;
+            flex-shrink: 0;
+            text-decoration: none;
+        }
+
+        .contact-item img {
+            width: 130px;
+            height: 130px;
+            object-fit: contain;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .contact-item a:hover img,
+        .contact-item button:hover img {
+            transform: scale(1.15);
+        }
+
+        .contact-item p {
+            margin: 0;
+            font-family: 'Kirang Haerang', sans-serif;
+            font-size: clamp(42px, 4vw, 66px);
+            color: #f5f0df;
+        }
+
+        /* L'icona della mail apre il box */
+        #email-trigger {
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            color: inherit;
+            font: inherit;
+        }
+
+        /* Box email */
+        .email-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            width: min(420px, calc(100vw - 40px));
+            box-sizing: border-box;
+            padding: 28px;
+            background: #f5f0df;
+            color: #146a9c;
+            border: 3px solid #146a9c;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition:
+                opacity 0.2s ease,
+                transform 0.2s ease,
+                visibility 0.2s ease;
+        }
+
+        .email-popup.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .email-popup h2 {
+            margin: 0 0 18px;
+            font-family: 'Notable', sans-serif;
+            font-size: 25px;
+            font-weight: 400;
+        }
+
+        .email-address {
+            display: block;
+            margin-bottom: 22px;
+            font-family: monospace;
+            font-size: clamp(14px, 3.5vw, 17px);
+            overflow-wrap: anywhere;
+            user-select: text;
+        }
+
+        .email-popup-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .email-copy-button,
+        .email-close-button {
+            border: 2px solid #146a9c;
+            padding: 10px 15px;
+            font-family: 'Kirang Haerang', sans-serif;
+            font-size: 20px;
+            cursor: pointer;
+            transition:
+                background-color 0.15s ease,
+                color 0.15s ease;
+        }
+
+        .email-copy-button {
+            background: #146a9c;
+            color: #f5f0df;
+        }
+
+        .email-copy-button:hover {
+            background: #f5f0df;
+            color: #146a9c;
+        }
+
+        .email-close-button {
+            background: transparent;
+            color: #146a9c;
+        }
+
+        .email-close-button:hover {
+            background: #146a9c;
+            color: #f5f0df;
+        }
+
+        .email-copy-status {
+            min-height: 20px;
+            margin: 14px 0 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+
+        /* Sfondo semitrasparente dietro al popup */
+        .email-popup-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.2s ease, visibility 0.2s ease;
+        }
+
+        .email-popup-backdrop.is-open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+
+        @media (max-width: 600px) {
+            .email-popup {
+                padding: 22px;
+            }
+
+            .email-popup h2 {
+                font-size: 21px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="camera">
+        <div id="scene">
+            <main>
+                <div class="contact-title-container">
+                    <h1 class="contact-title">WANT TO TALK?</h1>
+
+                    <div class="scroll-prompt" id="contact-scroll-prompt">
+                        <img src="Assets/Scroll/Frame_1.png" alt="" class="scroll-frame frame-one">
+                        <img src="Assets/Scroll/Frame_2.png" alt="" class="scroll-frame frame-two">
+                    </div>
+                </div>
+
+                <div id="phone-animation">
+                    <img src="Assets/Phone/Idle/PhoneIdle_01.png" alt="">
+                </div>
+
+                <div class="contact-list">
+                    <div class="contact-item">
+                        <button
+                            type="button"
+                            id="email-trigger"
+                            aria-label="Mostra indirizzo email"
+                            aria-haspopup="dialog"
+                            aria-controls="email-popup"
+                            aria-expanded="false">
+                            <img src="images/contact-1.png" alt="Email per lavori e progetti">
+                        </button>
+                        <p>If you want to talk about jobs and projects</p>
+                    </div>
+
+                    <div class="contact-item">
+                        <a href="https://www.youtube.com/@humpfrr"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <img src="images/contact-2.png" alt="Video">
+                        </a>
+                        <p>If you want to watch my videos</p>
+                    </div>
+
+                    <div class="contact-item">
+                        <a href="https://www.instagram.com/humpfrr/"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <img src="images/contact-3.png" alt="Reel sui social">
+                        </a>
+                        <p>If you want to see my reels in your feed</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Sfondo del popup -->
+    <div class="email-popup-backdrop" id="email-popup-backdrop"></div>
+
+    <!-- Popup email -->
+    <section
+        class="email-popup"
+        id="email-popup"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="email-popup-title"
+        aria-hidden="true">
+
+        <h2 id="email-popup-title">GET IN TOUCH</h2>
+
+        <span class="email-address" id="email-address">
+            cacciapuoti.luke@gmail.com
+        </span>
+
+        <div class="email-popup-actions">
+            <button type="button" class="email-copy-button" id="email-copy-button">
+                COPY
+            </button>
+
+            <button type="button" class="email-close-button" id="email-close-button">
+                CLOSE
+            </button>
+        </div>
+
+        <p class="email-copy-status" id="email-copy-status" aria-live="polite"></p>
+    </section>
+
+    <nav class="navigation">
+        <a href="index.html">HOME</a>
+        <a href="works.html">WORKS</a>
+        <a href="contact.html">CONTACT ME</a>
+    </nav>
+
+    <div id="custom-cursor" aria-hidden="true">✳</div>
+
+    <script src="./custom-cursor.js"></script>
+    <script src="click-sparks.js"></script>
+    <script src="js/camera.js"></script>
+
+    <script>
+        /* Popup email */
+        const emailTrigger = document.querySelector('#email-trigger');
+        const emailPopup = document.querySelector('#email-popup');
+        const emailBackdrop = document.querySelector('#email-popup-backdrop');
+        const emailCopyButton = document.querySelector('#email-copy-button');
+        const emailCloseButton = document.querySelector('#email-close-button');
+        const emailAddress = document.querySelector('#email-address');
+        const emailCopyStatus = document.querySelector('#email-copy-status');
+
+        function openEmailPopup() {
+            emailPopup.classList.add('is-open');
+            emailBackdrop.classList.add('is-open');
+
+            emailPopup.setAttribute('aria-hidden', 'false');
+            emailTrigger.setAttribute('aria-expanded', 'true');
+
+            emailCopyStatus.textContent = '';
+            emailCopyButton.focus();
+        }
+
+        function closeEmailPopup() {
+            emailPopup.classList.remove('is-open');
+            emailBackdrop.classList.remove('is-open');
+
+            emailPopup.setAttribute('aria-hidden', 'true');
+            emailTrigger.setAttribute('aria-expanded', 'false');
+
+            emailTrigger.focus();
+        }
+
+        async function copyEmailAddress() {
+            const email = emailAddress.textContent.trim();
+
+            try {
+                await navigator.clipboard.writeText(email);
+                emailCopyStatus.textContent = 'Email copied!';
+            } catch (error) {
+                /* Metodo alternativo se Clipboard API non è disponibile */
+                const temporaryInput = document.createElement('textarea');
+
+                temporaryInput.value = email;
+                temporaryInput.setAttribute('readonly', '');
+                temporaryInput.style.position = 'fixed';
+                temporaryInput.style.opacity = '0';
+
+                document.body.appendChild(temporaryInput);
+                temporaryInput.select();
+
+                const copied = document.execCommand('copy');
+                temporaryInput.remove();
+
+                emailCopyStatus.textContent = copied
+                    ? 'Email copied!'
+                    : 'Copy failed. Select the email and copy it manually.';
+            }
+        }
+
+        emailTrigger.addEventListener('click', openEmailPopup);
+        emailCloseButton.addEventListener('click', closeEmailPopup);
+        emailBackdrop.addEventListener('click', closeEmailPopup);
+        emailCopyButton.addEventListener('click', copyEmailAddress);
+
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && emailPopup.classList.contains('is-open')) {
+                closeEmailPopup();
+            }
+        });
+
+        /* Animazione telefono */
+        const phoneImage = document.querySelector('#phone-animation img');
+
+        const idleFrameCount = 20;
+        const scrollFrameCount = 129;
+        const idleFrameDuration = 80;
+        const scrollFrameDuration = 40;
+
+        let currentIdleFrame = 0;
+        let idleInterval = null;
+        let scrollInterval = null;
+
+        const idleFrames = [];
+        const scrollFrames = [];
+
+        // Precarica tutti i frame dell'animazione idle.
+        for (let i = 1; i <= idleFrameCount; i++) {
+            const frame = new Image();
+            const frameNumber = String(i).padStart(2, '0');
+
+            frame.src = `Assets/Phone/Idle/PhoneIdle_${frameNumber}.png`;
+            idleFrames.push(frame);
+        }
+
+        // Precarica tutti i frame dell'animazione scroll.
+        for (let i = 1; i <= scrollFrameCount; i++) {
+            const frame = new Image();
+            const frameNumber = String(i).padStart(3, '0');
+
+            frame.src = `Assets/Phone/Scroll/PhoneScroll_${frameNumber}.png`;
+            scrollFrames.push(frame);
+        }
+
+        function startIdleAnimation() {
+            clearInterval(idleInterval);
+
+            currentIdleFrame = 0;
+            phoneImage.src = idleFrames[currentIdleFrame].src;
+
+            currentIdleFrame++;
+
+            idleInterval = setInterval(() => {
+                phoneImage.src = idleFrames[currentIdleFrame].src;
+
+                currentIdleFrame =
+                    (currentIdleFrame + 1) % idleFrameCount;
+            }, idleFrameDuration);
+        }
+
+        function startScrollAnimation() {
+            /*
+             * Se PhoneScroll è già in riproduzione, non fare nulla.
+             * scrollInterval viene azzerato solo al termine della sequenza.
+             */
+            if (scrollInterval !== null) return;
+
+            clearInterval(idleInterval);
+            idleInterval = null;
+
+            let currentScrollFrame = 0;
+
+            phoneImage.src = scrollFrames[currentScrollFrame].src;
+            currentScrollFrame++;
+
+            scrollInterval = setInterval(() => {
+                if (currentScrollFrame >= scrollFrameCount) {
+                    clearInterval(scrollInterval);
+                    scrollInterval = null;
+
+                    startIdleAnimation();
+                    return;
+                }
+
+                phoneImage.src = scrollFrames[currentScrollFrame].src;
+                currentScrollFrame++;
+            }, scrollFrameDuration);
+        }
+
+        // La rotella avvia PhoneScroll solo quando non è già in corso.
+        window.addEventListener('wheel', () => {
+            if (scrollInterval === null) {
+                startScrollAnimation();
+            }
+        }, { passive: true });
+
+        // Avvia l'animazione idle dopo il caricamento dei frame.
+        Promise.all(
+            [...idleFrames, ...scrollFrames].map(frame => {
+                if (frame.complete && frame.naturalWidth > 0) {
+                    return Promise.resolve();
+                }
+
+                return new Promise(resolve => {
+                    frame.onload = resolve;
+                    frame.onerror = resolve;
+                });
+            })
+        ).then(() => {
+            // Evita che il caricamento dei frame interrompa PhoneScroll.
+            if (scrollInterval === null) {
+                startIdleAnimation();
+            }
+        });
+    </script>
+</body>
+</html>
