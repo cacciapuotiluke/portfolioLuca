@@ -37,18 +37,34 @@ document.addEventListener("DOMContentLoaded", () => {
     const isWorksPage = !!document.querySelector(".works-title-container");
 
     function aggiornaDimensioni() {
-        scale = isWorksPage
-            ? 1
-            : Math.min(
+        const isMobile = window.matchMedia(
+            "(max-width: 600px), (pointer: coarse)"
+        ).matches;
+
+        if (isWorksPage) {
+            scale = 1;
+        } else if (isMobile) {
+            // Su telefono, usa la larghezza dello schermo
+            // per evitare che la scena diventi minuscola.
+            scale = window.innerWidth / SCENE_WIDTH;
+        } else {
+            // Mantiene il comportamento originale su desktop.
+            scale = Math.min(
                 window.innerWidth / SCENE_WIDTH,
                 window.innerHeight / SCENE_HEIGHT
             );
+        }
     }
 
     aggiornaDimensioni();
+
     window.addEventListener("resize", aggiornaDimensioni);
+    window.addEventListener("orientationchange", aggiornaDimensioni);
 
     document.addEventListener("mousemove", (event) => {
+        // Nessuna parallasse basata sul mouse sui dispositivi touch.
+        if (window.matchMedia("(pointer: coarse)").matches) return;
+
         const x = (event.clientX / window.innerWidth - 0.5) * 2;
         const y = (event.clientY / window.innerHeight - 0.5) * 2;
 
