@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Notable&family=Kirang+Haerang&display=swap" rel="stylesheet">
 
+    
     <style>
         body {
             background-color: #146a9c !important;
@@ -18,7 +19,7 @@
             min-height: 100vh;
         }
 
-        /* Contenitore condiviso da titolo e scroll-prompt */
+        /* Contenitore titolo e scroll prompt */
         .contact-title-container {
             position: absolute;
             top: 15%;
@@ -35,14 +36,14 @@
             padding: 0 20px;
             box-sizing: border-box;
             font-family: 'Notable', sans-serif;
-            font-size: clamp(54px, 16vw, 156px);
+            font-size: clamp(44px, 12vw, 70px);
             font-weight: 400;
             line-height: 1.1;
             color: #f5f0df;
             text-align: center;
         }
 
-        /* Scroll-prompt relativo al contenitore del titolo */
+        /* Scroll prompt */
         body:has(.contact-title-container) #contact-scroll-prompt {
             position: absolute !important;
             left: 58% !important;
@@ -54,12 +55,14 @@
             opacity: 1 !important;
         }
 
+        /* Telefono */
         #phone-animation {
             position: absolute;
             top: 24%;
             left: 48%;
-            width: 1700px;
+            width: min(115%, 500px);
             height: auto;
+            margin-top: 185px;
             z-index: 1;
             pointer-events: none;
         }
@@ -70,6 +73,7 @@
             height: auto;
         }
 
+        /* Lista contatti */
         .contact-list {
             position: absolute;
             top: 41%;
@@ -77,9 +81,11 @@
             transform: translateX(-50%);
             display: flex;
             flex-direction: column;
-            gap: 80px;
+            gap: 60px;
             width: fit-content;
             max-width: calc(100% - 40px);
+            padding: 40px 16px 70px;
+            box-sizing: border-box;
         }
 
         .contact-item {
@@ -96,8 +102,8 @@
         }
 
         .contact-item img {
-            width: 130px;
-            height: 130px;
+            width: 135px;
+            height: 135px;
             object-fit: contain;
             flex-shrink: 0;
             transition: transform 0.2s ease;
@@ -109,13 +115,15 @@
         }
 
         .contact-item p {
+            max-width: 360px;
             margin: 0;
             font-family: 'Kirang Haerang', sans-serif;
-            font-size: clamp(42px, 4vw, 66px);
+            font-size: clamp(32px, 8vw, 44px);
+            line-height: 1.2;
             color: #f5f0df;
         }
 
-        /* L'icona della mail apre il box */
+        /* Pulsante email */
         #email-trigger {
             cursor: pointer;
             background: none;
@@ -125,7 +133,7 @@
             font: inherit;
         }
 
-        /* Box email */
+        /* Popup email */
         .email-popup {
             position: fixed;
             top: 50%;
@@ -180,9 +188,9 @@
         .email-copy-button,
         .email-close-button {
             border: 2px solid #146a9c;
-            padding: 10px 15px;
+            padding: 12px 18px;
             font-family: 'Kirang Haerang', sans-serif;
-            font-size: 20px;
+            font-size: 23px;
             cursor: pointer;
             transition:
                 background-color 0.15s ease,
@@ -216,7 +224,7 @@
             font-size: 12px;
         }
 
-        /* Sfondo semitrasparente dietro al popup */
+        /* Sfondo popup */
         .email-popup-backdrop {
             position: fixed;
             inset: 0;
@@ -234,17 +242,137 @@
             pointer-events: auto;
         }
 
-        @media (max-width: 600px) {
-            .email-popup {
-                padding: 22px;
-            }
-
-            .email-popup h2 {
-                font-size: 21px;
+        /* Nasconde il cursore personalizzato su mobile */
+        @media (hover: none), (pointer: coarse) {
+            #custom-cursor {
+                display: none !important;
             }
         }
 
-        /* Prevent text selection */
+        /* Impostazioni mobile */
+        @media (max-width: 600px) {
+            /* Navigazione invariata */
+            .navigation {
+                position: fixed;
+                top: 16px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                width: max-content;
+                max-width: calc(100% - 20px);
+                z-index: 1000;
+            }
+
+            .navigation a {
+                white-space: nowrap;
+            }
+
+            /* Titolo */
+            .contact-title-container {
+                position: absolute;
+                top: 115px;
+                left: 0;
+                width: 100%;
+                transform: none;
+            }
+
+            .contact-title {
+                width: 100%;
+                padding: 0 10px;
+                font-size: clamp(44px, 12vw, 70px);
+                line-height: 1.1;
+                text-align: center;
+            }
+
+            /* Nasconde il prompt */
+            #contact-scroll-prompt {
+                display: none !important;
+            }
+
+            /* Telefono */
+            #phone-animation {
+                position: relative;
+                top: auto;
+                left: auto;
+                width: min(115%, 500px);
+                height: auto;
+                margin: 185px auto 0;
+                pointer-events: auto;
+                cursor: pointer;
+                z-index: 2;
+            }
+
+            #phone-animation img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+
+            /* Contatti */
+            .contact-list {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 60px;
+                width: 100%;
+                max-width: none;
+                box-sizing: border-box;
+                padding: 40px 16px 70px;
+            }
+
+            .contact-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                width: 100%;
+                text-align: center;
+            }
+
+            .contact-item a,
+            .contact-item button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .contact-item img {
+                width: 135px;
+                height: 135px;
+                object-fit: contain;
+            }
+
+            .contact-item p {
+                max-width: 360px;
+                font-size: clamp(32px, 8vw, 44px);
+                line-height: 1.2;
+                text-align: center;
+            }
+
+            /* Popup */
+            .email-popup {
+                padding: 28px;
+            }
+
+            .email-popup h2 {
+                font-size: 25px;
+            }
+
+            .email-copy-button,
+            .email-close-button {
+                font-size: 23px;
+                padding: 12px 18px;
+            }
+        }
+
+        /* Impedisce la selezione del testo */
         * {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -252,120 +380,13 @@
             user-select: none;
         }
 
-        /* Prevent image dragging */
+        /* Impedisce il trascinamento delle immagini */
         img {
             -webkit-user-drag: none;
             user-drag: none;
         }
-
-        @media (max-width: 600px) {
-
-        /* Navigazione centrata in alto */
-        .navigation {
-            position: fixed;
-            top: 16px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            width: max-content;
-            max-width: calc(100% - 20px);
-            z-index: 1000;
-        }
-
-        .navigation a {
-            white-space: nowrap;
-        }
-
-        /* Titolo centrato */
-        .contact-title-container {
-            position: absolute;
-            top: 115px;
-            left: 0;
-            width: 100%;
-            transform: none;
-        }
-
-        .contact-title {
-            width: 100%;
-            padding: 0 10px;
-            font-size: clamp(36px, 10vw, 58px);
-            line-height: 1.1;
-            text-align: center;
-        }
-
-        /* Nasconde il prompt dello scroll su mobile */
-        #contact-scroll-prompt {
-            display: none !important;
-        }
-
-        /* Telefono centrato e interattivo */
-        #phone-animation {
-            position: relative;
-            top: auto;
-            left: auto;
-            width: min(100%, 420px);
-            height: auto;
-            margin: 175px auto 0;
-            pointer-events: auto;
-            cursor: pointer;
-            z-index: 2;
-        }
-
-        #phone-animation img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-        /* Contatti in colonna */
-        .contact-list {
-            position: relative;
-            top: auto;
-            left: auto;
-            transform: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 45px;
-            width: 100%;
-            max-width: none;
-            box-sizing: border-box;
-            padding: 30px 20px 60px;
-        }
-
-        .contact-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-            width: 100%;
-            text-align: center;
-        }
-
-        .contact-item a,
-        .contact-item button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .contact-item img {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-        }
-
-        .contact-item p {
-            max-width: 320px;
-            font-size: clamp(28px, 7vw, 38px);
-            line-height: 1.15;
-            text-align: center;
-        }
-    }
     </style>
+
 </head>
 
 <body>
@@ -610,7 +631,7 @@
                 currentScrollFrame++;
             }, scrollFrameDuration);
         }
-        
+
         // Il tocco sul telefono avvia PhoneScroll.
         phoneImage.parentElement.addEventListener('click', () => {
             if (scrollInterval === null) {
