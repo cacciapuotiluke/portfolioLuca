@@ -536,6 +536,28 @@
                 white-space: nowrap;
             }
 
+            .works-gallery {
+                left: 3%;
+                width: 94vw;
+                max-width: 94vw;
+                gap: 4px;
+            }
+
+            .works-gallery .work-rectangle,
+            .works-gallery:hover .work-rectangle {
+                flex: 1 1 0;
+                min-width: 0;
+            }
+
+            .works-gallery .work-rectangle.active {
+                flex: 1 1 0;
+            }
+
+            .works-gallery:has(.work-rectangle.active) .work-rectangle:not(.active),
+            .works-gallery:has(.work-rectangle:hover) .work-rectangle:not(:hover) {
+                flex: 1 1 0;
+            }
+
             /* Fascia blu a tutta larghezza dietro il menu */
             .mobile-nav-band {
                 display: block;
@@ -556,6 +578,13 @@
                 opacity: 0 !important;
                 pointer-events: none !important;
             }
+
+            .works-title-container {
+            left: 50%;
+            width: max-content;
+            transform: translate(-50%, -50%);
+            --title-size: clamp(70px, 18vw, 110px);
+        }
         }
     </style>
 </head>
