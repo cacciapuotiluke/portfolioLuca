@@ -1116,3 +1116,13 @@ img {
     -webkit-user-drag: none;
     user-drag: none;
 }
+
+/* Posizionamento decorazioni rispetto al titolo */
+.name-stack {
+    position: relative;
+}
+
+.decorative-text {
+    position: absolute;
+    left: calc(100% + 35px);
+}
