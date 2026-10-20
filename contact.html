@@ -259,14 +259,31 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                gap: 8px;
+                gap: 10px;
                 width: max-content;
                 max-width: calc(100% - 20px);
+                padding: 4px;
                 z-index: 1000;
+            }
+
+            /* Banda fissa dietro al menu */
+            .navigation::before {
+                content: "";
+                position: fixed;
+                top: -16px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100vw;
+                height: 90px;
+                background-color: #146a9c;
+                z-index: -1;
+                pointer-events: none;
             }
 
             .navigation a {
                 white-space: nowrap;
+                font-size: 1.08em;
+                padding: 8px 12px;
             }
 
             #camera {
