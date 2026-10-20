@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         "Adam's Animation Academy Exam": {
             description: "This is the final animation I did for the Advanced Animation course at Adam's Animation Academy. I used an already existing rig of Finn from Adventure Time, I drew the crown and the compass and then I used the rock's rig Adam gave me. The brief was to make the character enter the screen and then getting roadblocked by an obstacle; then eventually he had to give the obstacle his hat or any kind of prop. I did everything in Harmony except for the sound design, which was done by Tommaso Marchetto in Reaper.",
-            youtubeId: "_PfxrY_l_pw"
+            youtubeId: "YAet9hl1GzY"
         },
         "Awesomeland Project": {
             description: "Awesomeland was a 5-day jam based on a concept by Filippo Magnani: a fictional Disneyland presented by its own fictional Walt Disney, Ralph Ziegler, in a documentary about the park. The jam took the form of a teaser showing behind-the-scenes footage from the documentary’s production. I animated Ralph Ziegler and his makeup artist, and created the storyboard and animatic for the entire short. The jam was created with Filippo Magnani, Tommaso Marchetto and Andrea Starace.",
