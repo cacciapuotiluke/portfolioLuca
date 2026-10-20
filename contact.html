@@ -288,117 +288,7 @@
                 white-space: nowrap;
             }
 
-            /* Titolo */
-            .contact-title-container {
-                position: absolute;
-                top: 115px;
-                left: 0;
-                width: 100%;
-                transform: none;
-            }
-
-            .contact-title {
-                width: 100%;
-                padding: 0 10px;
-                font-size: clamp(48px, 12vw, 72px);
-                line-height: 1.1;
-                text-align: center;
-            }
-
-            /* Nasconde lo scroll prompt */
-            #contact-scroll-prompt {
-                display: none !important;
-            }
-
-            /* Telefono */
-            #phone-animation {
-                position: relative;
-                top: auto;
-                left: auto;
-                display: block;
-                width: 100%;
-                max-width: 500px;
-                height: auto;
-                margin: 190px auto 0;
-                pointer-events: auto;
-                cursor: pointer;
-                z-index: 2;
-            }
-
-            #phone-animation img {
-                display: block;
-                width: 100%;
-                height: auto;
-            }
-
-            /* Lista contatti */
-            .contact-list {
-                position: relative;
-                top: auto;
-                left: auto;
-                transform: none;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 65px;
-                width: 100%;
-                max-width: none;
-                box-sizing: border-box;
-                padding: 40px 20px 80px;
-            }
-
-            .contact-item {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 18px;
-                width: 100%;
-                text-align: center;
-            }
-
-            .contact-item a,
-            .contact-item button {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .contact-item img {
-                width: 150px;
-                height: 150px;
-                object-fit: contain;
-            }
-
-            .contact-item p {
-                width: 100%;
-                max-width: 420px;
-                font-size: clamp(34px, 8.5vw, 48px);
-                line-height: 1.2;
-                text-align: center;
-            }
-
-            /* Popup email */
-            .email-popup {
-                width: min(480px, calc(100vw - 32px));
-                padding: 28px;
-            }
-
-            .email-popup h2 {
-                font-size: 25px;
-            }
-
-            .email-copy-button,
-            .email-close-button {
-                font-size: 23px;
-                padding: 12px 18px;
-            }
-
-            /* =====================================
-               CORREZIONE SCENA MOBILE
-               Annulla le dimensioni fisse globali
-               di 2560 × 986 px.
-            ===================================== */
-
+            /* Scena mobile: elimina le dimensioni fisse desktop */
             #camera {
                 position: relative;
                 width: 100%;
@@ -417,69 +307,158 @@
                 top: auto;
                 margin: 0;
                 transform: none;
-                transform-origin: top left;
+                transform-origin: top center;
                 overflow: visible;
             }
 
             #scene main {
                 position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
                 width: 100%;
                 min-height: 100svh;
+                padding-top: 125px;
+                box-sizing: border-box;
             }
 
-            /* Ripristina il layout mobile dei contatti */
+            /* Titolo: più grande e centrato */
+            .contact-title-container,
             #scene .contact-title-container {
-                position: absolute;
-                top: 115px;
-                left: 0;
+                position: relative;
+                top: auto;
+                left: auto;
                 width: 100%;
+                margin: 0;
                 transform: none;
+                text-align: center;
+                box-sizing: border-box;
             }
 
+            .contact-title,
             #scene .contact-title {
                 width: 100%;
-                padding: 0 10px;
-                font-size: clamp(48px, 12vw, 72px);
+                margin: 0;
+                padding: 0 8px;
+                font-size: clamp(58px, 13vw, 82px);
+                line-height: 1;
+                text-align: center;
+                overflow-wrap: anywhere;
+                box-sizing: border-box;
             }
 
+            /* Nasconde lo scroll prompt */
+            #contact-scroll-prompt {
+                display: none !important;
+            }
+
+            /* Telefono: più grande e centrato */
+            #phone-animation,
             #scene #phone-animation {
                 position: relative;
                 top: auto;
                 left: auto;
-                width: 100%;
-                max-width: 500px;
-                margin: 190px auto 0;
+                display: block;
+                width: 120%;
+                max-width: none;
+                height: auto;
+                margin: 65px auto 20px;
+                transform: none;
+                pointer-events: auto;
+                cursor: pointer;
+                z-index: 2;
+                flex-shrink: 0;
             }
 
+            #phone-animation img {
+                display: block;
+                width: 100%;
+                height: auto;
+            }
+
+            /* Contatti: centrati in colonna */
+            .contact-list,
             #scene .contact-list {
                 position: relative;
                 top: auto;
                 left: auto;
-                transform: none;
-                width: 100%;
-                max-width: none;
-                padding: 40px 20px 80px;
-                gap: 65px;
-            }
-
-            #scene .contact-item {
+                display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 18px;
+                justify-content: center;
+                gap: 85px;
                 width: 100%;
+                max-width: none;
+                margin: 0;
+                padding: 55px 16px 100px;
+                transform: none;
+                text-align: center;
+                box-sizing: border-box;
             }
 
+            .contact-item,
+            #scene .contact-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 22px;
+                width: 100%;
+                margin: 0;
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            .contact-item a,
+            .contact-item button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            /* Icone ingrandite */
+            .contact-item img,
             #scene .contact-item img {
-                width: 150px;
-                height: 150px;
+                display: block;
+                width: 190px;
+                height: 190px;
+                max-width: 60vw;
+                object-fit: contain;
             }
 
+            /* Testi ingranditi e centrati */
+            .contact-item p,
             #scene .contact-item p {
                 width: 100%;
-                max-width: 420px;
-                font-size: clamp(34px, 8.5vw, 48px);
-                line-height: 1.2;
+                max-width: 520px;
+                margin: 0;
+                font-size: clamp(40px, 9.5vw, 56px);
+                line-height: 1.1;
                 text-align: center;
+                overflow-wrap: anywhere;
+                box-sizing: border-box;
+            }
+
+            /* Popup email: dimensioni originali mantenute */
+            .email-popup {
+                width: min(420px, calc(100vw - 40px));
+                padding: 28px;
+            }
+
+            .email-popup h2 {
+                font-size: 25px;
+            }
+
+            .email-copy-button,
+            .email-close-button {
+                font-size: 20px;
+                padding: 10px 15px;
+            }
+
+            /* Cursore personalizzato nascosto su dispositivi touch */
+            #custom-cursor {
+                display: none !important;
             }
         }
     </style>
