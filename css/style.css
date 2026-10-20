@@ -1177,8 +1177,8 @@ img {
 /* FIX — 2D ANIMATION / STORYBOARD */
 #scene .hero::before {
     content: "2D ANIMATION  /  STORYBOARD" !important;
-
     position: absolute !important;
+
     top: 470px !important;
     left: 140.8px !important;
     right: auto !important;
@@ -1192,6 +1192,6 @@ img {
     line-height: normal !important;
     white-space: nowrap !important;
 
-    opacity: 0;
-    animation: fadeIn 0.8s ease 1.6s both;
+    opacity: 1 !important;
+    animation: none !important;
 }
