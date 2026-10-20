@@ -488,6 +488,37 @@
             .mobile-nav-band {
                 display: none;
             }
+
+            @media (max-width: 600px) {
+        #scroll-prompt,
+        .scroll-prompt,
+        #custom-cursor {
+            display: none !important;
+        }
+    }
+        }
+
+        @media (max-width: 600px) {
+            .navigation {
+                position: fixed;
+                top: 16px;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 10px;
+                width: max-content;
+                max-width: calc(100% - 20px);
+                padding: 4px;
+                z-index: 1000;
+            }
+
+            .navigation a {
+                white-space: nowrap;
+                font-size: 1.08em;
+                padding: 8px 12px;
+            }
         }
     </style>
 </head>
