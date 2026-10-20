@@ -1128,91 +1128,51 @@ img {
 }
 
 /* =========================
-   HOME - ELEMENTI PIÙ GRANDI
+   HOME — CORREZIONI FINALI
 ========================= */
 
-/* Titolo */
-.hero h1 {
-    font-size: clamp(90px, 17vw, 270px) !important;
+/* Mantiene il font originale e le dimensioni definite
+   dal sistema di coordinate della scena */
+#scene .name-stack .original-name,
+#scene .name-stack .name-copy {
+    font-family: 'Notable', sans-serif !important;
+    font-size: 281.6px !important;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 0.8;
+    text-transform: uppercase;
 }
 
-/* Tagline */
-.hero .tagline {
-    font-size: 1.2em !important;
+/* Evita che il vecchio testo decorativo venga duplicato */
+#scene .hero::before {
+    content: none !important;
 }
 
-/* Icona About Me */
-.about-me-button {
-    width: clamp(65px, 8vw, 115px) !important;
+/* Testo decorativo posizionato rispetto al nome */
+#scene .name-stack::after {
+    content: "2D ANIMATION / STORYBOARD";
+    position: absolute;
+    left: calc(100% + 35px);
+    top: 310px;
+
+    font-family: 'DM Mono', monospace;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1.2;
+    white-space: nowrap;
+
+    color: var(--text);
+    pointer-events: none;
+
+    opacity: 0;
+    animation: fadeIn 0.8s ease 1.6s both;
 }
 
-/* Scritta decorativa 2D ANIMATION / STORYBOARD */
-.decorative-text {
-    font-size: 1.15em !important;
-}
-
-/* Omino animato */
-#character {
-    scale: 1.15;
-    transform-origin: center bottom;
-}
-
-/* =========================
-   ADATTAMENTO MOBILE
-========================= */
-
+/* Mantiene la disposizione della scena anche su mobile */
 @media screen and (max-width: 600px) {
-    .hero h1 {
-        font-size: clamp(55px, 15vw, 110px) !important;
-    }
-
-    .hero .tagline {
-        font-size: 1.1em !important;
-    }
-
-    .about-me-button {
-        width: clamp(55px, 12vw, 75px) !important;
-    }
-
-    .decorative-text {
-        font-size: 0.9em !important;
-    }
-
-    #character {
-        scale: 1.05;
-    }
-}
-
-/* Interruzione del cognome solo su mobile */
-.mobile-break {
-    display: none;
-}
-
-@media screen and (max-width: 600px) {
-    .mobile-break {
-        display: initial;
-    }
-
-    .hero h1 {
-        font-size: clamp(55px, 15vw, 110px) !important;
-    }
-}
-
-/* HOME — dimensioni uniformi del nome e delle copie */
-.hero h1.original-name,
-.hero .name-copy {
-    font-family: inherit !important;
-    font-size: clamp(90px, 17vw, 270px) !important;
-    font-weight: inherit !important;
-    line-height: 0.82 !important;
-    letter-spacing: inherit !important;
-}
-
-/* Mobile */
-@media screen and (max-width: 600px) {
-    .hero h1.original-name,
-    .hero .name-copy {
-        font-size: clamp(55px, 15vw, 110px) !important;
-        line-height: 0.82 !important;
+    #scene .name-stack .original-name,
+    #scene .name-stack .name-copy {
+        font-size: 281.6px !important;
     }
 }
