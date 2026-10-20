@@ -1,7 +1,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Notable&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Kirang+Haerang&family=Notable&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap');
 
 :root {
     --background: #f3f0e8;
@@ -9,12 +9,31 @@
     --accent: #146a9c;
     --line: rgba(245, 240, 223, 0.25);
     --name-size: clamp(120px, 11vw, 360px);
+
+    /* Tempi delle animazioni */
+    --restart-grande: 100s;
+    --restart-medio: 80s;
+    --restart-piccolo: 65s;
+
+    /* Ritardi iniziali */
+    --ritardo-grande: 3s;
+    --ritardo-medio: 8s;
+    --ritardo-piccolo: 5s;
+
+    /* Tempi prima del riavvio */
+    --timer-grande: 74s;
+    --timer-medio: 80s;
+    --timer-piccolo: 65s;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 body {
@@ -23,9 +42,12 @@ body {
     font-family: 'Space Grotesk', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
+    animation: backgroundFade 0.8s ease both;
 }
 
-/* Menu */
+/* ==============================
+   MENU DI NAVIGAZIONE
+   ============================== */
 
 .navigation {
     position: fixed;
@@ -57,7 +79,9 @@ body {
     color: #146a9c;
 }
 
-/* Home layout */
+/* ==============================
+   HOME
+   ============================== */
 
 .hero {
     min-height: 100svh;
@@ -81,160 +105,6 @@ body {
     z-index: 1;
 }
 
-.tagline {
-    font-family: 'Kirang Haerang', cursive;
-    max-width: 320px;
-    font-size: 42px;
-    font-weight: 500;
-    line-height: 1.3;
-    padding-bottom: 5px;
-    position: relative;
-    top: 230px;
-    font-style: italic;
-}
-
-/* Decorative elements */
-
-.hero::before {
-    font-family: 'Kirang Haerang', cursive;
-    content: "2D ANIMATION  /  STORYBOARD";
-    position: absolute;
-    top: 470px;
-    left: 5.5%;
-    font-family: 'DM Mono', monospace;
-    font-size: 48px;
-    letter-spacing: 1px;
-}
-
-/* Mobile */
-
-@media (max-width: 700px) {
-    .navigation {
-        top: 25px;
-        left: 5%;
-        right: 5%;
-        justify-content: flex-start;
-        gap: 6px;
-    }
-
-    .navigation a {
-        padding: 10px 12px;
-        font-size: 10px;
-    }
-
-    .hero {
-        grid-template-columns: 1fr;
-        align-content: center;
-        align-items: start;
-        gap: 25px;
-        padding: 140px 5% 100px;
-    }
-
-    .hero h1 {
-        font-size: clamp(60px, 11vw, 180px);
-        letter-spacing: -0.02em;
-        overflow-wrap: anywhere;
-    }
-
-    .tagline {
-        font-size: 16px;
-        margin-left: 5px;
-    }
-
-    .hero::before {
-        top: 100px;
-        font-size: 16px;
-    }
-
-    .hero::after {
-        bottom: 60px;
-    }
-
-    body::after {
-        bottom: 25px;
-        font-size: 9px;
-    }
-}
-
-/* Entrance animations */
-
-body {
-    animation: backgroundFade 0.8s ease both;
-}
-
-.tagline {
-    opacity: 0;
-    animation: fadeInUp 0.8s ease 1.3s both;
-}
-
-.hero::before {
-    opacity: 0;
-    animation: fadeIn 0.8s ease 1.6s both;
-}
-
-.hero::after {
-    transform: scaleX(0);
-    transform-origin: left;
-    animation: lineReveal 0.8s ease 2s both;
-}
-
-/* Animation definitions */
-
-@keyframes backgroundFade {
-    from {
-        background-color: transparent;
-    }
-    to {
-        background-color: var(--background);
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes lineReveal {
-    from {
-        transform: scaleX(0);
-    }
-    to {
-        transform: scaleX(1);
-    }
-}
-
-/* Accessibility: reduce motion if requested */
-
-@media (prefers-reduced-motion: reduce) {
-    body,
-    .hero h1,
-    .tagline,
-    .navigation,
-    .hero::before,
-    .hero::after {
-        animation: none;
-        opacity: 1;
-        transform: none;
-    }
-}
-
-/* Layered name animation */
-
 .name-stack {
     position: relative;
     width: fit-content;
@@ -250,7 +120,7 @@ body {
     }
 }
 
-/* Original name */
+/* Nome originale */
 
 .hero .name-stack .original-name {
     font-family: 'Notable', sans-serif;
@@ -260,7 +130,7 @@ body {
     animation: originalAppear 0.8s ease 0.5s both;
 }
 
-/* Copies */
+/* Copie del nome */
 
 .name-copy {
     font-family: 'Notable', sans-serif;
@@ -321,29 +191,109 @@ body {
     }
 }
 
+/* Sottotitolo */
 
-
-/* Tempi delle animazioni: modificabili */
-
-:root {
-    /* Durata di un giro completo */
-    --restart-grande: 100s;
-    --restart-medio: 80s;
-    --restart-piccolo: 65s;
-
-    /* Ritardo iniziale prima della prima rotazione */
-    --ritardo-grande: 3s;
-    --ritardo-medio: 8s;
-    --ritardo-piccolo: 5s;
-
-    /* Tempo prima del riavvio forzato */
-    --timer-grande: 74s;
-    --timer-medio: 80s;
-    --timer-piccolo: 65s;
-
+.tagline {
+    font-family: 'Kirang Haerang', cursive;
+    max-width: 320px;
+    font-size: 42px;
+    font-weight: 500;
+    line-height: 1.3;
+    padding-bottom: 5px;
+    position: relative;
+    top: 230px;
+    font-style: italic;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease 1.3s both;
+    transition: transform 200ms ease;
+    transform-origin: center;
 }
 
-/* Cerchi sfondo */
+.tagline:hover {
+    transform: scale(1.08);
+}
+
+p.tagline {
+    display: inline-block;
+    transition: scale 200ms ease;
+}
+
+p.tagline:hover {
+    scale: 1.15;
+}
+
+/* ==============================
+   TESTO DECORATIVO
+   2D ANIMATION / STORYBOARD
+   ============================== */
+
+.hero::before {
+    content: "2D ANIMATION  /  STORYBOARD";
+    position: absolute;
+    top: 470px;
+    left: 5.5%;
+    font-family: 'Kirang Haerang', cursive;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    opacity: 0;
+    animation: fadeIn 0.8s ease 1.6s both;
+}
+
+/* Linea decorativa */
+
+.hero::after {
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: lineReveal 0.8s ease 2s both;
+}
+
+/* ==============================
+   ANIMAZIONI GENERALI
+   ============================== */
+
+@keyframes backgroundFade {
+    from {
+        background-color: transparent;
+    }
+    to {
+        background-color: var(--background);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes lineReveal {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* ==============================
+   SFONDO ANIMATO: CERCHI
+   ============================== */
 
 .circles-background {
     position: fixed;
@@ -353,65 +303,118 @@ body {
     z-index: 0;
 }
 
-/* Contenitori */
-
 .circle-entry {
     position: absolute;
     inset: 0;
     pointer-events: none;
 }
 
-/* Cerchio grande: parte dal basso a sinistra */
-
-.circle-large {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 30vmax;
-    aspect-ratio: 1;
-    border-radius: 50%;
-
-    transform-origin: 70% -100%;
-
-    background: #ffb24ec9;
-
-    animation: rotateLarge var(--restart-grande) linear
-        var(--ritardo-grande) infinite;
-}
-
-/* Cerchio medio: parte dall'alto */
-
-.circle-medium {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 28vmax;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    transform-origin: -30% 60%;
-    background: #7fe962a1;
-
-    animation: rotateMedium var(--restart-medio) linear
-        var(--ritardo-medio) infinite;
-}
-
-/* Cerchio piccolo: parte dall'alto a destra */
-
+.circle-large,
+.circle-medium,
 .circle-small {
     position: absolute;
     left: 0;
     bottom: 0;
-    width: 20vmax;
     aspect-ratio: 1;
     border-radius: 50%;
-    transform-origin: 40% 130%;
-    background: #ff83d4a2;
-
-    animation: rotateSmall var(--restart-piccolo) linear
-        var(--ritardo-piccolo) infinite;
+    isolation: isolate;
 }
 
-/* Posizioni iniziali + parallasse */
+/* Cerchio grande */
+
+.circle-large {
+    width: 30vmax;
+    transform-origin: 70% -100%;
+    background: #ffb24ec9;
+    animation: rotateLarge var(--restart-grande) linear
+        var(--ritardo-grande) infinite;
+
+    background-image:
+        repeating-radial-gradient(
+            ellipse 50% 100% at 50% 50%,
+            transparent 0,
+            transparent 18px,
+            rgba(255, 255, 255, 0.2) 19px,
+            transparent 20px
+        ),
+        repeating-radial-gradient(
+            ellipse 100% 50% at 50% 50%,
+            transparent 0,
+            transparent 18px,
+            rgba(255, 255, 255, 0.2) 19px,
+            transparent 20px
+        );
+
+    background-size: 100% 100%;
+
+    filter:
+        drop-shadow(0 0 18px rgba(255, 233, 146, 0.55))
+        drop-shadow(0 0 38px rgba(255, 247, 211, 0.616));
+}
+
+/* Cerchio medio */
+
+.circle-medium {
+    width: 28vmax;
+    transform-origin: -30% 60%;
+    background: #7fe962a1;
+    animation: rotateMedium var(--restart-medio) linear
+        var(--ritardo-medio) infinite;
+
+    background-image: repeating-radial-gradient(
+        circle at 50% 50%,
+        transparent 0,
+        transparent 18px,
+        rgba(255, 255, 255, 0.22) 19px,
+        transparent 20px
+    );
+
+    background-size: 100% 100%;
+
+    filter:
+        drop-shadow(0 0 18px rgba(147, 223, 126, 0.55))
+        drop-shadow(0 0 38px rgba(147, 223, 126, 0.30));
+}
+
+/* Cerchio piccolo */
+
+.circle-small {
+    width: 20vmax;
+    transform-origin: 40% 130%;
+    background: #ff83d4a2;
+    animation: rotateSmall var(--restart-piccolo) linear
+        var(--ritardo-piccolo) infinite;
+
+    background-image: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.25) 1.5px,
+        transparent 2px
+    );
+
+    background-size: 12px 12px;
+
+    filter:
+        drop-shadow(0 0 18px rgba(228, 158, 203, 0.55))
+        drop-shadow(0 0 38px rgba(228, 158, 203, 0.30));
+}
+
+/* Ombre interne */
+
+.circle-large::after,
+.circle-medium::after,
+.circle-small::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    pointer-events: none;
+    box-shadow:
+        inset 0 0 70px 30px rgba(0, 0, 0, 0.38),
+        inset 0 0 18px 6px rgba(0, 0, 0, 0.22);
+    mix-blend-mode: overlay;
+}
+
+/* Posizioni iniziali e parallasse */
 
 .entry-large {
     transform: translate(
@@ -432,146 +435,25 @@ body {
         calc(90vw + var(--parallax-x, 0px)),
         calc(-90vh + var(--parallax-y, 0px))
     );
+    visibility: hidden;
+    animation: revealSmallCircle 0s steps(1, end) 12s forwards;
 }
 
-/* Rotazioni continue */
+/* Rotazioni */
 
 @keyframes rotateLarge {
     from { transform: rotate(0deg); }
-    to   { transform: rotate(-360deg); }
+    to { transform: rotate(-360deg); }
 }
 
 @keyframes rotateMedium {
     from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
+    to { transform: rotate(360deg); }
 }
 
 @keyframes rotateSmall {
     from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-}
-
-/* Contenuti in primo piano */
-
-.navigation {
-    position: fixed;
-    z-index: 10;
-}
-
-.hero {
-    position: relative;
-    z-index: 1;
-}
-
-/* Movimento ridotto */
-
-@media (prefers-reduced-motion: reduce) {
-    .circle-large,
-    .circle-medium,
-    .circle-small {
-        animation: none;
-    }
-}
-
-.hero::before {
-    font-family: 'Kirang Haerang', cursive;
-}
-
-
-/* Profondità e ombre in Overlay */
-
-.circle-large,
-.circle-medium,
-.circle-small {
-    isolation: isolate;
-}
-
-/* Livello dedicato alle ombre */
-.circle-large::after,
-.circle-medium::after,
-.circle-small::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    pointer-events: none;
-    box-shadow:
-        inset 0 0 70px 30px rgba(0, 0, 0, 0.38),
-        inset 0 0 18px 6px rgba(0, 0, 0, 0.22);
-    mix-blend-mode: overlay;
-}
-
-/* CERCHIO GRANDE — wireframe sferico */
-.circle-large {
-      background-image:
-        /* Meridiani */
-        repeating-radial-gradient(
-            ellipse 50% 100% at 50% 50%,
-            transparent 0,
-            transparent 18px,
-            rgba(255, 255, 255, 0.2) 19px,
-            transparent 20px
-        ),
-        /* Paralleli */
-        repeating-radial-gradient(
-            ellipse 100% 50% at 50% 50%,
-            transparent 0,
-            transparent 18px,
-            rgba(255, 255, 255, 0.2) 19px,
-            transparent 20px
-        );
-
-    background-size: 100% 100%;
-}
-
-/* CERCHIO MEDIO — cerchi concentrici */
-.circle-medium {
-    background-image: repeating-radial-gradient(
-        circle at 50% 50%,
-        transparent 0,
-        transparent 18px,
-        rgba(255, 255, 255, 0.22) 19px,
-        transparent 20px
-    );
-    background-size: 100% 100%;
-}
-
-/* CERCHIO PICCOLO — pois */
-.circle-small {
-    background-image: radial-gradient(
-        circle,
-        rgba(255, 255, 255, 0.25) 1.5px,
-        transparent 2px
-    );
-    background-size: 12px 12px;
-}
-
-
-
-/* Glow colorato per ogni cerchio */
-.circle-large {
-    filter:
-        drop-shadow(0 0 18px rgba(255, 233, 146, 0.55))
-        drop-shadow(0 0 38px rgba(255, 247, 211, 0.616));
-}
-
-.circle-medium {
-    filter:
-        drop-shadow(0 0 18px rgba(147, 223, 126, 0.55))
-        drop-shadow(0 0 38px rgba(147, 223, 126, 0.30));
-}
-
-.circle-small {
-    filter:
-        drop-shadow(0 0 18px rgba(228, 158, 203, 0.55))
-        drop-shadow(0 0 38px rgba(228, 158, 203, 0.30));
-}
-
-
-/* Il contenitore del cerchio piccolo parte invisibile */
-.entry-small {
-    visibility: hidden;
-    animation: revealSmallCircle 0s steps(1, end) 12s forwards;
+    to { transform: rotate(360deg); }
 }
 
 @keyframes revealSmallCircle {
@@ -580,8 +462,6 @@ body {
     }
 }
 
-
-
 /* ==============================
    PERSONAGGIO INTERATTIVO
    ============================== */
@@ -589,61 +469,52 @@ body {
 #character {
     position: fixed;
     z-index: 20;
-
     width: min(260px, 26vw);
     aspect-ratio: 1 / 1;
     height: auto;
-
     left: 37%;
     right: auto;
     top: 650vh;
-
     transform: translateY(-50%);
-
     overflow: visible;
     pointer-events: none;
     will-change: top;
+    opacity: 0;
+    visibility: hidden;
+    animation: characterFadeIn 1.2s ease forwards;
+    animation-delay: 0.7s;
+    transition: scale 200ms ease;
+    scale: 1;
+    transform-origin: center -30%;
 }
 
-/* Tutte le parti mantengono il canvas originale */
 #character .part {
     position: absolute;
     inset: 0;
-
     width: 100%;
     height: 100%;
-
     transform-box: border-box;
     transform-origin: 50% 50%;
-
     overflow: visible;
     pointer-events: none;
     will-change: transform;
 }
 
-/* Immagini sovrapposte senza spostamenti */
 #character .part > img {
     display: block;
     position: absolute;
     inset: 0;
-
     width: 100%;
     height: 100%;
-
     object-fit: fill;
     max-width: none;
     margin: 0;
     padding: 0;
-
     pointer-events: none;
 }
 
-/* ==============================
-   PUNTI DI ROTAZIONE
-   Coordinate originali: 3600 × 3600
-   ============================== */
+/* Punti di rotazione: coordinate originali 3600 × 3600 */
 
-/* Braccia superiori: spalle */
 #character .arm-left-upper {
     transform-origin: 43.0556% 29.4444%;
 }
@@ -652,7 +523,6 @@ body {
     transform-origin: 53.3333% 29.1667%;
 }
 
-/* Avambracci: gomiti */
 #character .arm-left-lower {
     transform-origin: 32.6389% 35.8333%;
 }
@@ -661,7 +531,6 @@ body {
     transform-origin: 65% 35.5556%;
 }
 
-/* Cosce: anche */
 #character .leg-left-upper {
     transform-origin: 43.6111% 50.8333%;
 }
@@ -670,7 +539,6 @@ body {
     transform-origin: 53.6111% 51.3889%;
 }
 
-/* Gambe inferiori: ginocchia */
 #character .leg-left-lower {
     transform-origin: 32.7778% 63.1944%;
 }
@@ -679,9 +547,7 @@ body {
     transform-origin: 65.5556% 62.7778%;
 }
 
-/* ==============================
-   TESTA
-   ============================== */
+/* Testa */
 
 #character .head {
     transform-origin: 50% 29%;
@@ -699,23 +565,8 @@ body {
     display: block;
 }
 
-/* ==============================
-   SCHERMI PICCOLI
-   ============================== */
-
-@media (max-width: 600px) {
-    #character {
-        width: min(240px, 55vw);
-        left: 42%;
-        right: auto;
-    }
-}
-
-#character {
-    opacity: 0;
-    visibility: hidden;
-    animation: characterFadeIn 1.2s ease forwards;
-    animation-delay: 0.7s; /* Modifica questo valore */
+#character.cursor-over {
+    scale: 0.9;
 }
 
 @keyframes characterFadeIn {
@@ -730,42 +581,16 @@ body {
 }
 
 /* ==============================
-   EFFETTO CLICK SPARK
+   CURSORE PERSONALIZZATO
    ============================== */
 
-.click-spark {
-    position: fixed;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 999999;
-    animation: sparkBurst 450ms ease-out forwards;
-}
-
-@keyframes sparkBurst {
-    from {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
-    }
-    to {
-        opacity: 0;
-        transform: translate(
-            calc(-50% + var(--move-x)),
-            calc(-50% + var(--move-y))
-        ) scale(0);
-    }
-}
-
-
-/* CURSORE PERSONALIZZATO */
 @media (hover: hover) and (pointer: fine) {
-        html,
-        body,
-        body * {
-            cursor: none !important;
-        }
+    html,
+    body,
+    body * {
+        cursor: none !important;
     }
+}
 
 #custom-cursor {
     display: block !important;
@@ -773,7 +598,6 @@ body {
     top: 0;
     left: 0;
     z-index: 2147483647;
-
     font-family: Arial, sans-serif;
     font-size: 40px;
     line-height: 1;
@@ -787,16 +611,15 @@ body {
         #e65bff,
         #ff004c
     );
+
     background-size: 300% 100%;
     color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
-
     pointer-events: none;
     user-select: none;
-
-    animation:
-        cursor-gradient 3s linear infinite;
+    animation: cursor-gradient 3s linear infinite;
+    transition: scale 180ms ease;
 }
 
 @keyframes cursor-gradient {
@@ -809,62 +632,21 @@ body {
     to { rotate: 360deg; }
 }
 
-#custom-cursor {
-    transition: scale 180ms ease;
-}
-
-.tagline {
-    transition: transform 200ms ease;
-    transform-origin: center;
-}
-
-.tagline:hover {
-    transform: scale(1.08);
-}
-
-p.tagline {
-    display: inline-block;
-    transition: scale 200ms ease;
-}
-
-p.tagline:hover {
-    scale: 1.15;
-}
-
-#camera {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    transform: scale(1.06);
-    transform-origin: center center;
-    will-change: transform;
-}
-
-#character {
-    transition: scale 200ms ease;
-    scale: 1;
-    transform-origin: center -30%;
-}
-
-#character.cursor-over {
-    scale: 0.9;
-}
-
-
-/* Indicazione Scroll sotto al nome */
+/* ==============================
+   INDICAZIONE SCROLL
+   ============================== */
 
 .scroll-prompt {
     position: absolute;
     left: 5%;
     top: calc(50% + 150px);
-    display: flex;
+    display: grid;
+    grid-template-columns: 32px auto;
     align-items: center;
     gap: 8px;
-
     font-family: 'Kirang Haerang', cursive;
     font-size: 16px;
     color: var(--text);
-
     opacity: 0;
     animation: scrollPromptFade 0.8s ease 2.8s forwards;
 }
@@ -874,11 +656,6 @@ p.tagline:hover {
     height: 104px;
     object-fit: contain;
     grid-area: 1 / 1;
-}
-
-.scroll-prompt {
-    display: grid;
-    grid-template-columns: 32px auto;
 }
 
 .scroll-prompt span {
@@ -915,12 +692,11 @@ p.tagline:hover {
     50%, 100% { opacity: 1; }
 }
 
-
-/* ==========================================================
+/* ==============================
    SCENA A PROPORZIONI FISSE
-   Sistema di coordinate: 2560 × 986
-   Il ridimensionamento uniforme verrà gestito da camera.js.
-   ========================================================== */
+   Coordinate: 2560 × 986
+   Il ridimensionamento è gestito da camera.js.
+   ============================== */
 
 #camera {
     position: relative;
@@ -942,18 +718,18 @@ p.tagline:hover {
     transform-origin: center center;
 }
 
-/* Sfondo della scena */
-
 #scene .circles-background {
     position: absolute;
     inset: 0;
     width: 2560px;
     height: 986px;
+    overflow: visible;
 }
 
 /* Composizione principale */
 
 #scene .hero {
+    position: relative;
     width: 2560px;
     min-height: 986px;
     height: 986px;
@@ -965,10 +741,46 @@ p.tagline:hover {
     gap: 35px;
 }
 
+/* Dimensioni del nome e delle copie */
+
 #scene .hero h1,
 #scene .name-copy {
     font-size: 281.6px;
 }
+
+#scene .name-stack h1.original-name,
+#scene .name-stack span.name-copy {
+    font-family: 'Notable', sans-serif !important;
+    font-size: 281.6px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    line-height: 0.8 !important;
+    text-transform: uppercase;
+}
+
+/* Posizione originale di 2D ANIMATION / STORYBOARD */
+
+#scene .hero::before {
+    content: "2D ANIMATION  /  STORYBOARD";
+    position: absolute;
+    top: 470px;
+    left: 140.8px;
+    right: auto;
+    bottom: auto;
+    transform: none;
+
+    font-family: 'Kirang Haerang', cursive;
+    font-size: 48px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: normal;
+    white-space: nowrap;
+
+    opacity: 0;
+    animation: fadeIn 0.8s ease 1.6s both;
+}
+
+/* Sottotitolo nella scena */
 
 #scene .tagline {
     font-size: 42px;
@@ -977,14 +789,7 @@ p.tagline:hover {
     max-width: 320px;
 }
 
-#scene .hero::before {
-    top: 470px;
-    left: 140.8px;
-    font-size: 48px;
-}
-
-/* Cerchi: dimensioni e posizioni espresse
-   nel sistema di coordinate della scena */
+/* Dimensioni e posizioni dei cerchi nella scena */
 
 #scene .circle-large {
     width: 768px;
@@ -1019,8 +824,7 @@ p.tagline:hover {
     );
 }
 
-/* Personaggio: appartiene alla scena,
-   non al viewport del browser */
+/* Personaggio nella scena */
 
 #scene #character {
     position: absolute;
@@ -1030,17 +834,73 @@ p.tagline:hover {
     right: auto;
 }
 
-/* Prompt di scroll */
+#scene .name-stack #character {
+    position: absolute;
+    top: calc(86.3% + var(--character-scroll-y, 0px));
+    left: 35.6%;
+    right: auto;
+    margin-top: 0;
+}
+
+/* Prompt di scroll nella scena */
 
 #scene .scroll-prompt {
     left: 128px;
     top: 643px;
 }
 
-/* Evita che la media query mobile originale
-   modifichi la composizione interna della scena */
+/* ==============================
+   RESPONSIVE
+   Mantiene la scena a coordinate fisse.
+   ============================== */
 
 @media (max-width: 700px) {
+    .navigation {
+        top: 25px;
+        left: 5%;
+        right: 5%;
+        justify-content: flex-start;
+        gap: 6px;
+    }
+
+    .navigation a {
+        padding: 10px 12px;
+        font-size: 10px;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        align-content: center;
+        align-items: start;
+        gap: 25px;
+        padding: 140px 5% 100px;
+    }
+
+    .hero h1 {
+        font-size: clamp(60px, 11vw, 180px);
+        letter-spacing: -0.02em;
+        overflow-wrap: anywhere;
+    }
+
+    .tagline {
+        font-size: 16px;
+        margin-left: 5px;
+    }
+
+    .hero::before {
+        top: 100px;
+        font-size: 16px;
+    }
+
+    .hero::after {
+        bottom: 60px;
+    }
+
+    body::after {
+        bottom: 25px;
+        font-size: 9px;
+    }
+
     #scene .hero {
         grid-template-columns: minmax(0, auto) 180px;
         align-content: center;
@@ -1049,8 +909,9 @@ p.tagline:hover {
         padding: 160px 128px 110px;
     }
 
-    #scene .hero h1 {
-        font-size: 281.6px;
+    #scene .hero h1,
+    #scene .name-copy {
+        font-size: 281.6px !important;
         overflow-wrap: normal;
     }
 
@@ -1061,137 +922,42 @@ p.tagline:hover {
 
     #scene .hero::before {
         top: 470px;
+        left: 140.8px;
+        font-family: 'Kirang Haerang', cursive;
         font-size: 48px;
+    }
+
+    #character {
+        width: min(240px, 55vw);
+        left: 42%;
+        right: auto;
     }
 }
 
+/* Accessibilità: riduzione del movimento */
 
-#scene {
-    width: 2560px;
-    height: 986px;
-    transform-origin: center center;
+@media (prefers-reduced-motion: reduce) {
+    body,
+    .hero h1,
+    .tagline,
+    .navigation,
+    .hero::before,
+    .hero::after {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .circle-large,
+    .circle-medium,
+    .circle-small {
+        animation: none;
+    }
 }
 
+/* Evita il trascinamento delle immagini */
 
-#scene .circles-background {
-    overflow: visible;
-}
-
-
-#scene .hero {
-    position: relative;
-}
-
-#scene .hero::before {
-    top: auto;
-    bottom: auto;
-    left: 10;
-    transform: translateY(-1100%);
-}
-
-
-#scene .name-stack {
-    position: relative;
-}
-
-
-#scene .name-stack #character {
-    position: absolute;
-    top: calc(86.3% + var(--character-scroll-y, 0px));
-    left: 35.6%;
-    right: auto;
-    margin-top: 0;
-}
-
-/* Prevent text and element selection */
-* {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/* Prevent images from being dragged */
 img {
     -webkit-user-drag: none;
     user-drag: none;
-}
-
-/* Posizionamento decorazioni rispetto al titolo */
-.name-stack {
-    position: relative;
-}
-
-.decorative-text {
-    position: absolute;
-    left: calc(100% + 35px);
-}
-
-/* =========================
-   HOME — CORREZIONI FINALI
-========================= */
-
-/* Mantiene il font originale e le dimensioni definite
-   dal sistema di coordinate della scena */
-#scene .name-stack h1.original-name,
-#scene .name-stack span.name-copy {
-    font-family: 'Notable', sans-serif !important;
-    font-size: 281.6px !important;
-    font-weight: 400 !important;
-    letter-spacing: 0 !important;
-    line-height: 0.8 !important;
-    text-transform: uppercase;
-}
-
-/* Evita che il vecchio testo decorativo venga duplicato */
-#scene .hero::before {
-    content: none !important;
-}
-
-/* HOME — 2D ANIMATION / STORYBOARD */
-#scene .hero::before {
-    content: "2D ANIMATION  /  STORYBOARD";
-    position: absolute;
-    top: 470px;
-    left: 140.8px;
-    transform: none;
-
-    font-family: 'Kirang Haerang', cursive;
-    font-size: 48px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    white-space: nowrap;
-
-    opacity: 0;
-    animation: fadeIn 0.8s ease 1.6s both;
-}
-
-/* Mantiene la disposizione della scena anche su mobile */
-@media screen and (max-width: 600px) {
-    #scene .name-stack .original-name,
-    #scene .name-stack .name-copy {
-        font-size: 281.6px !important;
-    }
-}
-
-/* 2D ANIMATION / STORYBOARD */
-#scene .hero::before {
-    content: "2D ANIMATION  /  STORYBOARD" !important;
-    position: absolute !important;
-
-    top: 390px !important;
-    left: 140.8px !important;
-    right: auto !important;
-    bottom: auto !important;
-    transform: none !important;
-
-    font-family: 'Kirang Haerang', cursive !important;
-    font-size: 48px !important;
-    font-weight: 400 !important;
-    letter-spacing: 1px !important;
-    line-height: 1 !important;
-    white-space: nowrap !important;
-
-    opacity: 1 !important;
-    animation: none !important;
 }
