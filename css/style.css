@@ -1197,3 +1197,22 @@ img {
         font-size: clamp(55px, 15vw, 110px) !important;
     }
 }
+
+/* HOME — dimensioni uniformi del nome e delle copie */
+.hero h1.original-name,
+.hero .name-copy {
+    font-family: inherit !important;
+    font-size: clamp(90px, 17vw, 270px) !important;
+    font-weight: inherit !important;
+    line-height: 0.82 !important;
+    letter-spacing: inherit !important;
+}
+
+/* Mobile */
+@media screen and (max-width: 600px) {
+    .hero h1.original-name,
+    .hero .name-copy {
+        font-size: clamp(55px, 15vw, 110px) !important;
+        line-height: 0.82 !important;
+    }
+}
