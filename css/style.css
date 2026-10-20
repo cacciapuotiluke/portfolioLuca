@@ -1173,3 +1173,25 @@ img {
         font-size: 281.6px !important;
     }
 }
+
+/* FIX — 2D ANIMATION / STORYBOARD */
+#scene .hero::before {
+    content: "2D ANIMATION  /  STORYBOARD" !important;
+
+    position: absolute !important;
+    top: 470px !important;
+    left: 140.8px !important;
+    right: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+
+    font-family: 'Kirang Haerang', cursive !important;
+    font-size: 48px !important;
+    font-weight: 400 !important;
+    letter-spacing: 1px !important;
+    line-height: normal !important;
+    white-space: nowrap !important;
+
+    opacity: 0;
+    animation: fadeIn 0.8s ease 1.6s both;
+}
