@@ -243,6 +243,20 @@
                 font-size: 21px;
             }
         }
+
+        /* Prevent text selection */
+        * {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Prevent image dragging */
+        img {
+            -webkit-user-drag: none;
+            user-drag: none;
+        }
     </style>
 </head>
 

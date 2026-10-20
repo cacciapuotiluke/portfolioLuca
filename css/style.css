@@ -1102,3 +1102,17 @@ p.tagline:hover {
     right: auto;
     margin-top: 0;
 }
+
+/* Prevent text and element selection */
+* {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Prevent images from being dragged */
+img {
+    -webkit-user-drag: none;
+    user-drag: none;
+}
