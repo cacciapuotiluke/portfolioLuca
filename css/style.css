@@ -224,7 +224,6 @@ p.tagline:hover {
 
 /* ==============================
    TESTO DECORATIVO
-   2D ANIMATION / STORYBOARD
    ============================== */
 
 .hero::before {
@@ -758,7 +757,7 @@ p.tagline:hover {
     text-transform: uppercase;
 }
 
-/* Posizione originale di 2D ANIMATION / STORYBOARD */
+/* Testo decorativo della scena: regola unica */
 
 #scene .hero::before {
     content: "2D ANIMATION  /  STORYBOARD";
@@ -768,14 +767,12 @@ p.tagline:hover {
     right: auto;
     bottom: auto;
     transform: none;
-
     font-family: 'Kirang Haerang', cursive;
     font-size: 48px;
     font-weight: 400;
     letter-spacing: 1px;
     line-height: normal;
     white-space: nowrap;
-
     opacity: 0;
     animation: fadeIn 0.8s ease 1.6s both;
 }
