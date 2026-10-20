@@ -762,8 +762,8 @@ p.tagline:hover {
 #scene .hero::before {
     content: "2D ANIMATION  /  STORYBOARD";
     position: absolute;
-    top: 470px;
-    left: 140.8px;
+    top: 39.55%;
+    left: 5.5%;
     right: auto;
     bottom: auto;
     transform: none;
