@@ -355,21 +355,17 @@
             }
 
             /* Telefono ingrandito */
-            #phone-animation,
-            #scene #phone-animation {
-                position: relative;
-                top: auto;
+            #phone-animation {
+                position: absolute;
                 left: 50%;
-                display: block;
+                top: 100%;
                 width: 130%;
                 max-width: none;
                 height: auto;
-                margin: 65px 0 20px;
+                margin: 0;
                 transform: translateX(-50%);
                 pointer-events: auto;
-                cursor: pointer;
                 z-index: 2;
-                flex-shrink: 0;
             }
 
             #phone-animation img {
@@ -507,10 +503,10 @@
                         <img src="assets/Scroll/Frame_1.webp" alt="" class="scroll-frame frame-one">
                         <img src="assets/Scroll/Frame_2.webp" alt="" class="scroll-frame frame-two">
                     </div>
-                </div>
 
-                <div id="phone-animation">
-                    <img src="assets/Phone/Idle/PhoneIdle_01.png" alt="">
+                    <div id="phone-animation">
+                        <img src="assets/Phone/Idle/PhoneIdle_01.png" alt="">
+                    </div>
                 </div>
 
                 <div class="contact-list">
@@ -665,6 +661,29 @@
                 closeEmailPopup();
             }
         });
+
+        /* Posiziona il telefono rispetto al titolo solo su mobile.
+           Su desktop lo mantiene come elemento separato della scena. */
+        const phoneAnimation = document.querySelector('#phone-animation');
+        const contactTitleContainer = document.querySelector('.contact-title-container');
+        const contactMain = document.querySelector('#scene main');
+        const contactList = document.querySelector('.contact-list');
+        const mobileContactLayout = window.matchMedia('(max-width: 600px)');
+
+        function updatePhonePlacement() {
+            if (!phoneAnimation || !contactTitleContainer || !contactMain || !contactList) return;
+
+            if (mobileContactLayout.matches) {
+                if (phoneAnimation.parentElement !== contactTitleContainer) {
+                    contactTitleContainer.appendChild(phoneAnimation);
+                }
+            } else if (phoneAnimation.parentElement !== contactMain) {
+                contactMain.insertBefore(phoneAnimation, contactList);
+            }
+        }
+
+        updatePhonePlacement();
+        mobileContactLayout.addEventListener('change', updatePhonePlacement);
 
         /* Animazione telefono */
         const phoneImage = document.querySelector('#phone-animation img');
