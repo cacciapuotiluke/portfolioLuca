@@ -559,6 +559,10 @@
                 --title-size: clamp(70px, 18vw, 110px);
             }
 
+            #fisherman {
+                left: calc(var(--title-size) * -0.8);
+            }
+
             /* Fascia blu dietro il menu */
             .mobile-nav-band {
                 display: block;
@@ -578,6 +582,21 @@
                 visibility: hidden !important;
                 opacity: 0 !important;
                 pointer-events: none !important;
+            }
+
+            /* Sposta leggermente verso l'alto il titolo e il pescatore */
+            .works-title-container {
+                top: 43%;
+            }
+
+            /* Sposta la galleria leggermente verso l'alto */
+            .works-gallery {
+                bottom: 17%;
+            }
+
+            /* Sposta le frecce di navigazione leggermente verso il basso */
+            .works-controls {
+                bottom: 3%;
             }
         }
     </style>
