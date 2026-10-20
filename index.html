@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -234,8 +235,6 @@
                 box-shadow 0.35s ease;
         }
 
-        /* Immagini centrate rispetto ai rispettivi cerchi */
-
         .about-photo-card img {
             position: absolute !important;
 
@@ -265,13 +264,9 @@
             visibility: visible !important;
         }
 
-        /* Abbassa il contenuto del primo cerchio */
-
         .about-photo-1 img {
             top: calc(60% + 10px) !important;
         }
-
-        /* Posizione dei tre cerchi */
 
         .about-photo-1 {
             top: -20%;
@@ -293,8 +288,6 @@
             rotate: -3deg;
             z-index: 2;
         }
-
-        /* Movimento al passaggio del cursore */
 
         .about-photos:hover .about-photo-1 {
             transform: translate(-5px, -5px);
@@ -364,8 +357,6 @@
                 transform: translate(-50%, -50%) !important;
             }
 
-            /* Mantiene lo spostamento verticale anche su mobile */
-
             .about-photo-1 img {
                 top: calc(50% + 10px) !important;
             }
@@ -396,7 +387,7 @@
                 pointer-events: none !important;
             }
 
-            /* Menu centrato e leggermente ingrandito */
+            /* Menu centrato */
 
             body .navigation {
                 position: fixed !important;
@@ -437,6 +428,43 @@
 
                 box-sizing: border-box;
             }
+
+            /* Titolo più grande su mobile */
+
+            .hero h1.original-name {
+                font-size: clamp(55px, 15vw, 110px) !important;
+            }
+
+            /* Interruzione del cognome */
+
+            .mobile-break {
+                display: initial !important;
+            }
+
+            /* Tagline */
+
+            .hero .tagline {
+                font-size: 1.1em !important;
+            }
+
+            /* Icona About Me */
+
+            .about-me-button {
+                width: clamp(55px, 12vw, 75px) !important;
+            }
+
+            /* Omino */
+
+            #character {
+                scale: 1.05;
+            }
+        }
+
+
+        /* Interruzione del cognome disattivata su desktop */
+
+        .mobile-break {
+            display: none;
         }
 
 
@@ -487,15 +515,22 @@
             <main class="hero">
 
                 <div class="name-stack">
-                    <h1 class="original-name">LUCA<br>CACCIAPUOTI</h1>
 
-                    <span class="name-copy copy-3">
-                        LUCA<br>CACCIAPUOTI
+                    <!-- Titolo principale -->
+                    <h1 class="original-name">
+                        LUCA<br><span class="surname">CACCIA<br class="mobile-break">PUOTI</span>
+                    </h1>
+
+                    <!-- Copia animata 1 -->
+                    <span class="name-copy copy-3" aria-hidden="true">
+                        LUCA<br><span class="surname">CACCIA<br class="mobile-break">PUOTI</span>
                     </span>
 
-                    <span class="name-copy copy-4">
-                        LUCA<br>CACCIAPUOTI
+                    <!-- Copia animata 2 -->
+                    <span class="name-copy copy-4" aria-hidden="true">
+                        LUCA<br><span class="surname">CACCIA<br class="mobile-break">PUOTI</span>
                     </span>
+
 
                     <!-- Personaggio -->
 
@@ -547,6 +582,7 @@
 
                     </div>
 
+
                     <!-- Icona animata About Me -->
 
                     <button
@@ -577,7 +613,9 @@
                             class="about-frame-3"
                         >
                     </button>
+
                 </div>
+
 
                 <div class="scroll-prompt" aria-hidden="true">
                     <img
@@ -695,10 +733,7 @@
 
         const rootStyle = getComputedStyle(document.documentElement);
 
-
-        /* =========================
-           ANIMAZIONE DEI CERCHI
-        ========================= */
+        /* Animazione dei cerchi */
 
         const cerchi = [
             {
@@ -776,9 +811,7 @@
         });
 
 
-        /* =========================
-           ANIMAZIONE ICONA ABOUT ME
-        ========================= */
+        /* Animazione ciclica dell'icona About Me */
 
         const aboutButton = document.querySelector("#about-me-trigger");
 
@@ -813,9 +846,7 @@
         }
 
 
-        /* =========================
-           APERTURA E CHIUSURA OVERLAY
-        ========================= */
+        /* Apertura e chiusura dell'overlay */
 
         const overlay = document.querySelector("#about-overlay");
         const panel = overlay?.querySelector(".about-panel");
@@ -853,8 +884,6 @@
                 }
             };
 
-
-            /* Apertura e chiusura */
 
             aboutButton.addEventListener("click", openOverlay);
 

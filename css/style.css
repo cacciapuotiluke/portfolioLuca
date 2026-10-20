@@ -1126,3 +1126,74 @@ img {
     position: absolute;
     left: calc(100% + 35px);
 }
+
+/* =========================
+   HOME - ELEMENTI PIÙ GRANDI
+========================= */
+
+/* Titolo */
+.hero h1 {
+    font-size: clamp(90px, 17vw, 270px) !important;
+}
+
+/* Tagline */
+.hero .tagline {
+    font-size: 1.2em !important;
+}
+
+/* Icona About Me */
+.about-me-button {
+    width: clamp(65px, 8vw, 115px) !important;
+}
+
+/* Scritta decorativa 2D ANIMATION / STORYBOARD */
+.decorative-text {
+    font-size: 1.15em !important;
+}
+
+/* Omino animato */
+#character {
+    scale: 1.15;
+    transform-origin: center bottom;
+}
+
+/* =========================
+   ADATTAMENTO MOBILE
+========================= */
+
+@media screen and (max-width: 600px) {
+    .hero h1 {
+        font-size: clamp(55px, 15vw, 110px) !important;
+    }
+
+    .hero .tagline {
+        font-size: 1.1em !important;
+    }
+
+    .about-me-button {
+        width: clamp(55px, 12vw, 75px) !important;
+    }
+
+    .decorative-text {
+        font-size: 0.9em !important;
+    }
+
+    #character {
+        scale: 1.05;
+    }
+}
+
+/* Interruzione del cognome solo su mobile */
+.mobile-break {
+    display: none;
+}
+
+@media screen and (max-width: 600px) {
+    .mobile-break {
+        display: initial;
+    }
+
+    .hero h1 {
+        font-size: clamp(55px, 15vw, 110px) !important;
+    }
+}
