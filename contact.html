@@ -257,6 +257,114 @@
             -webkit-user-drag: none;
             user-drag: none;
         }
+
+        @media (max-width: 600px) {
+
+        /* Navigazione centrata in alto */
+        .navigation {
+            position: fixed;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            width: max-content;
+            max-width: calc(100% - 20px);
+            z-index: 1000;
+        }
+
+        .navigation a {
+            white-space: nowrap;
+        }
+
+        /* Titolo centrato */
+        .contact-title-container {
+            position: absolute;
+            top: 115px;
+            left: 0;
+            width: 100%;
+            transform: none;
+        }
+
+        .contact-title {
+            width: 100%;
+            padding: 0 10px;
+            font-size: clamp(36px, 10vw, 58px);
+            line-height: 1.1;
+            text-align: center;
+        }
+
+        /* Nasconde il prompt dello scroll su mobile */
+        #contact-scroll-prompt {
+            display: none !important;
+        }
+
+        /* Telefono centrato e interattivo */
+        #phone-animation {
+            position: relative;
+            top: auto;
+            left: auto;
+            width: min(100%, 420px);
+            height: auto;
+            margin: 175px auto 0;
+            pointer-events: auto;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        #phone-animation img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* Contatti in colonna */
+        .contact-list {
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 45px;
+            width: 100%;
+            max-width: none;
+            box-sizing: border-box;
+            padding: 30px 20px 60px;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .contact-item a,
+        .contact-item button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+        }
+
+        .contact-item p {
+            max-width: 320px;
+            font-size: clamp(28px, 7vw, 38px);
+            line-height: 1.15;
+            text-align: center;
+        }
+    }
     </style>
 </head>
 
@@ -502,6 +610,13 @@
                 currentScrollFrame++;
             }, scrollFrameDuration);
         }
+        
+        // Il tocco sul telefono avvia PhoneScroll.
+        phoneImage.parentElement.addEventListener('click', () => {
+            if (scrollInterval === null) {
+                startScrollAnimation();
+            }
+        });
 
         // La rotella avvia PhoneScroll solo quando non è già in corso.
         window.addEventListener('wheel', () => {
