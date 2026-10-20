@@ -120,7 +120,7 @@
             font: inherit;
         }
 
-        /* Popup email: dimensioni originali */
+        /* Popup email */
         .email-popup {
             position: fixed;
             top: 50%;
@@ -137,7 +137,10 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+            transition:
+                opacity 0.2s ease,
+                transform 0.2s ease,
+                visibility 0.2s ease;
         }
 
         .email-popup.is-open {
@@ -176,7 +179,9 @@
             font-family: 'Kirang Haerang', sans-serif;
             font-size: 20px;
             cursor: pointer;
-            transition: background-color 0.15s ease, color 0.15s ease;
+            transition:
+                background-color 0.15s ease,
+                color 0.15s ease;
         }
 
         .email-copy-button {
@@ -214,7 +219,9 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition: opacity 0.2s ease, visibility 0.2s ease;
+            transition:
+                opacity 0.2s ease,
+                visibility 0.2s ease;
         }
 
         .email-popup-backdrop.is-open {
@@ -223,6 +230,7 @@
             pointer-events: auto;
         }
 
+        /* Selezione del testo */
         * {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -250,7 +258,20 @@
 
         /* MOBILE */
         @media (max-width: 600px) {
-            /* Menu invariato */
+            /* Banda indipendente: copre tutta la larghezza dello schermo */
+            .mobile-nav-band {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90px;
+                background-color: #146a9c;
+                z-index: 999;
+                pointer-events: none;
+            }
+
+            /* Menu fisso, centrato e leggermente ingrandito */
             .navigation {
                 position: fixed;
                 top: 16px;
@@ -264,19 +285,6 @@
                 max-width: calc(100% - 20px);
                 padding: 4px;
                 z-index: 1000;
-            }
-
-            /* Banda fissa dietro al menu */
-            .navigation::before {
-                content: "";
-                position: fixed;
-                top: -16px;
-                left: calc(50% - 50vw);
-                width: 100vw;
-                height: 90px;
-                background-color: #146a9c;
-                z-index: -1;
-                pointer-events: none;
             }
 
             .navigation a {
@@ -346,6 +354,7 @@
                 display: none !important;
             }
 
+            /* Telefono ingrandito */
             #phone-animation,
             #scene #phone-animation {
                 position: relative;
@@ -369,7 +378,7 @@
                 height: auto;
             }
 
-            /* Lista dei contatti centrata */
+            /* Lista dei contatti */
             .contact-list,
             #scene .contact-list {
                 position: relative;
@@ -426,6 +435,7 @@
                 flex-shrink: 0;
             }
 
+            /* Icone leggermente ridotte */
             .contact-list .contact-item img,
             #scene .contact-list .contact-item img {
                 display: block;
@@ -456,7 +466,7 @@
                 box-sizing: border-box;
             }
 
-            /* Popup: dimensioni invariate */
+            /* Popup: dimensioni mantenute */
             .email-popup {
                 width: min(420px, calc(100vw - 40px));
                 padding: 28px;
@@ -474,6 +484,13 @@
 
             #custom-cursor {
                 display: none !important;
+            }
+        }
+
+        /* La banda non deve comparire su desktop */
+        @media (min-width: 601px) {
+            .mobile-nav-band {
+                display: none;
             }
         }
     </style>
@@ -562,6 +579,9 @@
 
         <p class="email-copy-status" id="email-copy-status" aria-live="polite"></p>
     </section>
+
+    <!-- Banda mobile indipendente dal menu -->
+    <div class="mobile-nav-band" aria-hidden="true"></div>
 
     <nav class="navigation">
         <a href="index.html">HOME</a>
