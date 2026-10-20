@@ -18,7 +18,7 @@
             min-height: 100vh;
         }
 
-        /* Titolo: dimensioni desktop originali */
+        /* Titolo desktop */
         .contact-title-container {
             position: absolute;
             top: 15%;
@@ -42,7 +42,7 @@
             text-align: center;
         }
 
-        /* Scroll prompt */
+        /* Indicazione scroll desktop */
         body:has(.contact-title-container) #contact-scroll-prompt {
             position: absolute !important;
             left: 58% !important;
@@ -54,7 +54,7 @@
             opacity: 1 !important;
         }
 
-        /* Telefono desktop: dimensioni originali */
+        /* Telefono desktop */
         #phone-animation {
             position: absolute;
             top: 24%;
@@ -71,7 +71,7 @@
             height: auto;
         }
 
-        /* Contatti desktop: dimensioni originali */
+        /* Contatti desktop */
         .contact-list {
             position: absolute;
             top: 41%;
@@ -251,7 +251,7 @@
             user-select: text;
         }
 
-        /* Trascinamento immagini */
+        /* Evita il trascinamento delle immagini */
         img {
             -webkit-user-drag: none;
             user-drag: none;
@@ -266,12 +266,10 @@
 
         /* =========================================
            MOBILE
-           Le modifiche alle dimensioni sono confinate
-           agli schermi fino a 600px.
         ========================================= */
         @media (max-width: 600px) {
 
-            /* Navigazione: invariata */
+            /* Navigazione: dimensioni invariate */
             .navigation {
                 position: fixed;
                 top: 16px;
@@ -290,7 +288,7 @@
                 white-space: nowrap;
             }
 
-            /* Titolo mobile */
+            /* Titolo */
             .contact-title-container {
                 position: absolute;
                 top: 115px;
@@ -312,11 +310,12 @@
                 display: none !important;
             }
 
-            /* Telefono mobile */
+            /* Telefono */
             #phone-animation {
                 position: relative;
                 top: auto;
                 left: auto;
+                display: block;
                 width: 100%;
                 max-width: 500px;
                 height: auto;
@@ -332,7 +331,7 @@
                 height: auto;
             }
 
-            /* Lista contatti mobile */
+            /* Lista contatti */
             .contact-list {
                 position: relative;
                 top: auto;
@@ -378,7 +377,7 @@
                 text-align: center;
             }
 
-            /* Popup email mobile */
+            /* Popup email */
             .email-popup {
                 width: min(480px, calc(100vw - 32px));
                 padding: 28px;
@@ -392,6 +391,95 @@
             .email-close-button {
                 font-size: 23px;
                 padding: 12px 18px;
+            }
+
+            /* =====================================
+               CORREZIONE SCENA MOBILE
+               Annulla le dimensioni fisse globali
+               di 2560 × 986 px.
+            ===================================== */
+
+            #camera {
+                position: relative;
+                width: 100%;
+                height: auto;
+                min-height: 100svh;
+                overflow: visible;
+                transform: none;
+            }
+
+            #scene {
+                position: relative;
+                width: 100%;
+                height: auto;
+                min-height: 100svh;
+                left: auto;
+                top: auto;
+                margin: 0;
+                transform: none;
+                transform-origin: top left;
+                overflow: visible;
+            }
+
+            #scene main {
+                position: relative;
+                width: 100%;
+                min-height: 100svh;
+            }
+
+            /* Ripristina il layout mobile dei contatti */
+            #scene .contact-title-container {
+                position: absolute;
+                top: 115px;
+                left: 0;
+                width: 100%;
+                transform: none;
+            }
+
+            #scene .contact-title {
+                width: 100%;
+                padding: 0 10px;
+                font-size: clamp(48px, 12vw, 72px);
+            }
+
+            #scene #phone-animation {
+                position: relative;
+                top: auto;
+                left: auto;
+                width: 100%;
+                max-width: 500px;
+                margin: 190px auto 0;
+            }
+
+            #scene .contact-list {
+                position: relative;
+                top: auto;
+                left: auto;
+                transform: none;
+                width: 100%;
+                max-width: none;
+                padding: 40px 20px 80px;
+                gap: 65px;
+            }
+
+            #scene .contact-item {
+                flex-direction: column;
+                align-items: center;
+                gap: 18px;
+                width: 100%;
+            }
+
+            #scene .contact-item img {
+                width: 150px;
+                height: 150px;
+            }
+
+            #scene .contact-item p {
+                width: 100%;
+                max-width: 420px;
+                font-size: clamp(34px, 8.5vw, 48px);
+                line-height: 1.2;
+                text-align: center;
             }
         }
     </style>
@@ -450,7 +538,7 @@
         </div>
     </div>
 
-    <!-- Sfondo del popup -->
+    <!-- Sfondo popup -->
     <div class="email-popup-backdrop" id="email-popup-backdrop"></div>
 
     <!-- Popup email -->
@@ -556,7 +644,10 @@
         emailCopyButton.addEventListener('click', copyEmailAddress);
 
         document.addEventListener('keydown', event => {
-            if (event.key === 'Escape' && emailPopup.classList.contains('is-open')) {
+            if (
+                event.key === 'Escape' &&
+                emailPopup.classList.contains('is-open')
+            ) {
                 closeEmailPopup();
             }
         });
@@ -576,7 +667,7 @@
         const idleFrames = [];
         const scrollFrames = [];
 
-        // Precarica i frame dell'animazione idle.
+        /* Precarica i frame idle */
         for (let i = 1; i <= idleFrameCount; i++) {
             const frame = new Image();
             const frameNumber = String(i).padStart(2, '0');
@@ -585,7 +676,7 @@
             idleFrames.push(frame);
         }
 
-        // Precarica i frame dell'animazione scroll.
+        /* Precarica i frame scroll */
         for (let i = 1; i <= scrollFrameCount; i++) {
             const frame = new Image();
             const frameNumber = String(i).padStart(3, '0');
@@ -635,21 +726,21 @@
             }, scrollFrameDuration);
         }
 
-        // Il tocco sul telefono avvia PhoneScroll.
+        /* Il tocco sul telefono avvia l'animazione scroll */
         phoneImage.parentElement.addEventListener('click', () => {
             if (scrollInterval === null) {
                 startScrollAnimation();
             }
         });
 
-        // La rotella avvia PhoneScroll solo quando non è già in corso.
+        /* La rotella avvia l'animazione scroll */
         window.addEventListener('wheel', () => {
             if (scrollInterval === null) {
                 startScrollAnimation();
             }
         }, { passive: true });
 
-        // Avvia l'animazione idle dopo il caricamento dei frame.
+        /* Avvia idle dopo il caricamento dei frame */
         Promise.all(
             [...idleFrames, ...scrollFrames].map(frame => {
                 if (frame.complete && frame.naturalWidth > 0) {
