@@ -1,10 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Contact — Portfolio</title>
 
     <link rel="stylesheet" href="css/style.css">
@@ -18,7 +16,6 @@
             min-height: 100vh;
         }
 
-        /* Titolo desktop */
         .contact-title-container {
             position: absolute;
             top: 15%;
@@ -42,7 +39,6 @@
             text-align: center;
         }
 
-        /* Indicazione scroll desktop */
         body:has(.contact-title-container) #contact-scroll-prompt {
             position: absolute !important;
             left: 58% !important;
@@ -54,7 +50,6 @@
             opacity: 1 !important;
         }
 
-        /* Telefono desktop */
         #phone-animation {
             position: absolute;
             top: 24%;
@@ -71,7 +66,6 @@
             height: auto;
         }
 
-        /* Contatti desktop */
         .contact-list {
             position: absolute;
             top: 41%;
@@ -117,7 +111,6 @@
             color: #f5f0df;
         }
 
-        /* Pulsante email */
         #email-trigger {
             cursor: pointer;
             background: none;
@@ -127,7 +120,7 @@
             font: inherit;
         }
 
-        /* Popup email */
+        /* Popup email: dimensioni originali */
         .email-popup {
             position: fixed;
             top: 50%;
@@ -144,10 +137,7 @@
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
-            transition:
-                opacity 0.2s ease,
-                transform 0.2s ease,
-                visibility 0.2s ease;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
         }
 
         .email-popup.is-open {
@@ -186,9 +176,7 @@
             font-family: 'Kirang Haerang', sans-serif;
             font-size: 20px;
             cursor: pointer;
-            transition:
-                background-color 0.15s ease,
-                color 0.15s ease;
+            transition: background-color 0.15s ease, color 0.15s ease;
         }
 
         .email-copy-button {
@@ -218,7 +206,6 @@
             font-size: 12px;
         }
 
-        /* Sfondo popup */
         .email-popup-backdrop {
             position: fixed;
             inset: 0;
@@ -236,7 +223,6 @@
             pointer-events: auto;
         }
 
-        /* Selezione del testo */
         * {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -251,25 +237,20 @@
             user-select: text;
         }
 
-        /* Evita il trascinamento delle immagini */
         img {
             -webkit-user-drag: none;
             user-drag: none;
         }
 
-        /* Nasconde il cursore personalizzato sui dispositivi touch */
         @media (hover: none), (pointer: coarse) {
             #custom-cursor {
                 display: none !important;
             }
         }
 
-        /* =========================================
-           MOBILE
-        ========================================= */
+        /* MOBILE */
         @media (max-width: 600px) {
-
-            /* Navigazione: dimensioni invariate */
+            /* Menu invariato */
             .navigation {
                 position: fixed;
                 top: 16px;
@@ -288,7 +269,6 @@
                 white-space: nowrap;
             }
 
-            /* Scena mobile: elimina le dimensioni fisse desktop */
             #camera {
                 position: relative;
                 width: 100%;
@@ -322,7 +302,6 @@
                 box-sizing: border-box;
             }
 
-            /* Titolo: più grande e centrato */
             .contact-title-container,
             #scene .contact-title-container {
                 position: relative;
@@ -347,12 +326,10 @@
                 box-sizing: border-box;
             }
 
-            /* Nasconde lo scroll prompt */
             #contact-scroll-prompt {
                 display: none !important;
             }
 
-            /* Telefono: più grande e centrato */
             #phone-animation,
             #scene #phone-animation {
                 position: relative;
@@ -376,12 +353,13 @@
                 height: auto;
             }
 
-            /* Contatti: centrati in colonna */
+            /* Lista dei contatti centrata */
             .contact-list,
             #scene .contact-list {
                 position: relative;
                 top: auto;
                 left: auto;
+                right: auto;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -396,43 +374,65 @@
                 box-sizing: border-box;
             }
 
-            .contact-item,
-            #scene .contact-item {
+            .contact-list .contact-item,
+            #scene .contact-list .contact-item {
+                position: relative;
+                left: auto;
+                right: auto;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
+                justify-content: flex-start;
                 gap: 22px;
                 width: 100%;
+                max-width: 100%;
                 margin: 0;
+                padding: 0;
+                transform: none;
                 text-align: center;
                 box-sizing: border-box;
             }
 
-            .contact-item a,
-            .contact-item button {
+            .contact-list .contact-item > a,
+            .contact-list .contact-item > button,
+            #scene .contact-list .contact-item > a,
+            #scene .contact-list .contact-item > button {
+                position: relative;
+                left: auto;
+                right: auto;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                width: auto;
+                margin: 0 auto;
+                padding: 0;
+                transform: none;
                 flex-shrink: 0;
             }
 
-            /* Icone ingrandite */
-            .contact-item img,
-            #scene .contact-item img {
+            .contact-list .contact-item img,
+            #scene .contact-list .contact-item img {
                 display: block;
                 width: 190px;
                 height: 190px;
                 max-width: 60vw;
+                margin: 0 auto;
                 object-fit: contain;
+                flex-shrink: 0;
             }
 
-            /* Testi ingranditi e centrati */
-            .contact-item p,
-            #scene .contact-item p {
+            .contact-list .contact-item p,
+            #scene .contact-list .contact-item p {
+                position: relative;
+                left: auto;
+                right: auto;
+                display: block;
                 width: 100%;
                 max-width: 520px;
-                margin: 0;
+                margin: 0 auto;
+                padding: 0;
+                transform: none;
+                font-family: 'Kirang Haerang', sans-serif;
                 font-size: clamp(40px, 9.5vw, 56px);
                 line-height: 1.1;
                 text-align: center;
@@ -440,7 +440,7 @@
                 box-sizing: border-box;
             }
 
-            /* Popup email: dimensioni originali mantenute */
+            /* Popup: dimensioni invariate */
             .email-popup {
                 width: min(420px, calc(100vw - 40px));
                 padding: 28px;
@@ -456,7 +456,6 @@
                 padding: 10px 15px;
             }
 
-            /* Cursore personalizzato nascosto su dispositivi touch */
             #custom-cursor {
                 display: none !important;
             }
