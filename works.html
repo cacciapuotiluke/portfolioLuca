@@ -499,6 +499,64 @@
             -webkit-user-drag: none;
             user-drag: none;
         }
+
+        /* Fascia di sfondo del menu mobile */
+        .mobile-nav-band {
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            /* Menu centrato e dimensionato come in contact.html */
+            .navigation {
+                position: fixed;
+                top: 16px;
+                left: 50%;
+                right: auto;
+                width: max-content;
+                max-width: calc(100vw - 24px);
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 8px;
+                padding: 0;
+                margin: 0;
+                transform: translateX(-50%);
+                z-index: 1000;
+                opacity: 1;
+                animation: none;
+                white-space: nowrap;
+            }
+
+            .navigation a {
+                box-sizing: border-box;
+                padding: 8px 12px;
+                font-size: 1.08em;
+                white-space: nowrap;
+            }
+
+            /* Fascia blu a tutta larghezza dietro il menu */
+            .mobile-nav-band {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 90px;
+                background-color: #146a9c;
+                z-index: 999;
+                pointer-events: none;
+            }
+
+            /* Nasconde il cursore personalizzato sui dispositivi mobili */
+            #custom-cursor {
+                display: none !important;
+                visibility: hidden !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -597,6 +655,8 @@
             </div>
         </div>
     </div>
+
+    <div class="mobile-nav-band" aria-hidden="true"></div>
 
     <nav class="navigation">
         <a href="index.html">HOME</a>
