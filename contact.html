@@ -18,7 +18,7 @@
             min-height: 100vh;
         }
 
-        /* Titolo */
+        /* Titolo: dimensioni desktop originali */
         .contact-title-container {
             position: absolute;
             top: 15%;
@@ -35,7 +35,7 @@
             padding: 0 20px;
             box-sizing: border-box;
             font-family: 'Notable', sans-serif;
-            font-size: clamp(44px, 12vw, 70px);
+            font-size: clamp(54px, 16vw, 156px);
             font-weight: 400;
             line-height: 1.1;
             color: #f5f0df;
@@ -54,14 +54,13 @@
             opacity: 1 !important;
         }
 
-        /* Telefono desktop */
+        /* Telefono desktop: dimensioni originali */
         #phone-animation {
             position: absolute;
             top: 24%;
             left: 48%;
-            width: min(115%, 500px);
+            width: 1700px;
             height: auto;
-            margin-top: 185px;
             z-index: 1;
             pointer-events: none;
         }
@@ -72,7 +71,7 @@
             height: auto;
         }
 
-        /* Contatti desktop */
+        /* Contatti desktop: dimensioni originali */
         .contact-list {
             position: absolute;
             top: 41%;
@@ -80,11 +79,9 @@
             transform: translateX(-50%);
             display: flex;
             flex-direction: column;
-            gap: 60px;
+            gap: 80px;
             width: fit-content;
             max-width: calc(100% - 40px);
-            padding: 40px 16px 70px;
-            box-sizing: border-box;
         }
 
         .contact-item {
@@ -101,8 +98,8 @@
         }
 
         .contact-item img {
-            width: 135px;
-            height: 135px;
+            width: 130px;
+            height: 130px;
             object-fit: contain;
             flex-shrink: 0;
             transition: transform 0.2s ease;
@@ -114,11 +111,9 @@
         }
 
         .contact-item p {
-            max-width: 360px;
             margin: 0;
             font-family: 'Kirang Haerang', sans-serif;
-            font-size: clamp(32px, 8vw, 44px);
-            line-height: 1.2;
+            font-size: clamp(42px, 4vw, 66px);
             color: #f5f0df;
         }
 
@@ -187,9 +182,9 @@
         .email-copy-button,
         .email-close-button {
             border: 2px solid #146a9c;
-            padding: 12px 18px;
+            padding: 10px 15px;
             font-family: 'Kirang Haerang', sans-serif;
-            font-size: 23px;
+            font-size: 20px;
             cursor: pointer;
             transition:
                 background-color 0.15s ease,
@@ -241,14 +236,7 @@
             pointer-events: auto;
         }
 
-        /* Nasconde il cursore sui dispositivi touch */
-        @media (hover: none), (pointer: coarse) {
-            #custom-cursor {
-                display: none !important;
-            }
-        }
-
-        /* Impedisce la selezione del testo */
+        /* Selezione del testo */
         * {
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -263,16 +251,27 @@
             user-select: text;
         }
 
-        /* Impedisce il trascinamento delle immagini */
+        /* Trascinamento immagini */
         img {
             -webkit-user-drag: none;
             user-drag: none;
         }
 
-        /* Mobile */
+        /* Nasconde il cursore personalizzato sui dispositivi touch */
+        @media (hover: none), (pointer: coarse) {
+            #custom-cursor {
+                display: none !important;
+            }
+        }
+
+        /* =========================================
+           MOBILE
+           Le modifiche alle dimensioni sono confinate
+           agli schermi fino a 600px.
+        ========================================= */
         @media (max-width: 600px) {
 
-            /* Navigazione: dimensioni invariate */
+            /* Navigazione: invariata */
             .navigation {
                 position: fixed;
                 top: 16px;
@@ -291,7 +290,7 @@
                 white-space: nowrap;
             }
 
-            /* Titolo */
+            /* Titolo mobile */
             .contact-title-container {
                 position: absolute;
                 top: 115px;
@@ -303,24 +302,25 @@
             .contact-title {
                 width: 100%;
                 padding: 0 10px;
-                font-size: clamp(44px, 12vw, 70px) !important;
+                font-size: clamp(48px, 12vw, 72px);
                 line-height: 1.1;
                 text-align: center;
             }
 
-            /* Nasconde il prompt su mobile */
+            /* Nasconde lo scroll prompt */
             #contact-scroll-prompt {
                 display: none !important;
             }
 
-            /* Telefono più grande */
+            /* Telefono mobile */
             #phone-animation {
                 position: relative;
                 top: auto;
                 left: auto;
-                width: min(115%, 500px) !important;
+                width: 100%;
+                max-width: 500px;
                 height: auto;
-                margin: 185px auto 0 !important;
+                margin: 190px auto 0;
                 pointer-events: auto;
                 cursor: pointer;
                 z-index: 2;
@@ -332,7 +332,7 @@
                 height: auto;
             }
 
-            /* Contatti più grandi */
+            /* Lista contatti mobile */
             .contact-list {
                 position: relative;
                 top: auto;
@@ -341,18 +341,18 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 60px !important;
+                gap: 65px;
                 width: 100%;
                 max-width: none;
                 box-sizing: border-box;
-                padding: 40px 16px 70px !important;
+                padding: 40px 20px 80px;
             }
 
             .contact-item {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                gap: 12px;
+                gap: 18px;
                 width: 100%;
                 text-align: center;
             }
@@ -365,126 +365,35 @@
             }
 
             .contact-item img {
-                width: 135px !important;
-                height: 135px !important;
+                width: 150px;
+                height: 150px;
                 object-fit: contain;
             }
 
             .contact-item p {
-                max-width: 360px !important;
-                font-size: clamp(32px, 8vw, 44px) !important;
-                line-height: 1.2 !important;
+                width: 100%;
+                max-width: 420px;
+                font-size: clamp(34px, 8.5vw, 48px);
+                line-height: 1.2;
                 text-align: center;
             }
 
-            /* Popup più grande */
+            /* Popup email mobile */
             .email-popup {
-                padding: 28px !important;
+                width: min(480px, calc(100vw - 32px));
+                padding: 28px;
             }
 
             .email-popup h2 {
-                font-size: 25px !important;
+                font-size: 25px;
             }
 
             .email-copy-button,
             .email-close-button {
-                font-size: 23px !important;
-                padding: 12px 18px !important;
+                font-size: 23px;
+                padding: 12px 18px;
             }
         }
-
-        /* === CONTACT: DIMENSIONI MAGGIORATE === */
-
-        /* Titolo */
-        .contact-title {
-            font-size: clamp(64px, 10vw, 130px) !important;
-        }
-
-        /* Icone e testi dei contatti */
-        .contact-list {
-            gap: 80px !important;
-        }
-
-        .contact-item {
-            gap: 45px !important;
-        }
-
-        .contact-item img {
-            width: 180px !important;
-            height: 180px !important;
-        }
-
-        .contact-item p {
-            max-width: 600px !important;
-            font-size: clamp(42px, 4.5vw, 64px) !important;
-            line-height: 1.15 !important;
-        }
-
-        /* Popup email */
-        .email-popup {
-            width: min(560px, calc(100vw - 32px)) !important;
-            padding: 36px !important;
-        }
-
-        .email-popup h2 {
-            font-size: 32px !important;
-        }
-
-        .email-address {
-            font-size: clamp(17px, 2vw, 22px) !important;
-        }
-
-        .email-copy-button,
-        .email-close-button {
-            font-size: 28px !important;
-            padding: 14px 22px !important;
-        }
-
-        /* Telefono su desktop */
-        @media (min-width: 601px) {
-            #phone-animation {
-                width: min(55vw, 850px) !important;
-                margin-top: 0 !important;
-            }
-        }
-
-        /* Telefono e contatti su mobile */
-        @media (max-width: 600px) {
-            .contact-title {
-                font-size: clamp(48px, 13vw, 76px) !important;
-            }
-
-            #phone-animation {
-                width: 100% !important;
-                max-width: 600px !important;
-                margin: 190px auto 0 !important;
-            }
-
-            .contact-list {
-                gap: 75px !important;
-                padding: 50px 20px 90px !important;
-            }
-
-            .contact-item {
-                gap: 20px !important;
-            }
-
-            .contact-item img {
-                width: 175px !important;
-                height: 175px !important;
-            }
-
-            .contact-item p {
-                max-width: 500px !important;
-                font-size: clamp(36px, 9vw, 52px) !important;
-                line-height: 1.15 !important;
-            }
-
-            .email-popup {
-                padding: 28px !important;
-            }
-        }
-
     </style>
 </head>
 
