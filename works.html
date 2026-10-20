@@ -19,16 +19,24 @@
         }
 
         .works-title-container {
-            left: 50%;
-            width: 94vw;
-            transform: translate(-50%, -50%);
-            --title-size: clamp(40px, 15vw, 90px);
+            position: absolute;
+            left: 5%;
+            top: 46%;
+            transform: translateY(-50%);
+            width: max-content;
+            z-index: 5;
+            --title-size: clamp(130px, 10vw, 310px);
         }
 
         .works-title {
-            font-size: min(var(--title-size), 18vw);
-            max-width: 100%;
-            text-align: center;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            font-family: 'Notable', sans-serif;
+            font-size: var(--title-size);
+            font-weight: 400;
+            line-height: 0.85;
+            color: #f5f0df;
             white-space: nowrap;
         }
 
@@ -515,23 +523,56 @@
                 white-space: nowrap;
             }
 
-            /* Galleria mobile: 94% della larghezza dello schermo */
+            #fisherman {
+                pointer-events: auto !important;
+                cursor: pointer;
+            }
+
+            /* Titolo: centrato, più in alto e contenuto nello schermo */
+            .works-title-container {
+                position: absolute;
+                top: 43% !important;
+                left: 50% !important;
+                width: 94vw;
+                transform: translate(-50%, -50%) !important;
+                --title-size: clamp(40px, 15vw, 90px);
+            }
+
+            .works-heading {
+                width: 100%;
+            }
+
+            .works-heading .works-title {
+                width: 100%;
+                max-width: 100%;
+                font-size: min(var(--title-size), 18vw);
+                line-height: 0.9;
+                text-align: center;
+                white-space: nowrap;
+            }
+
+            /* Pescatore spostato a sinistra, mantenendo la posizione verticale */
+            #fisherman {
+                left: calc(var(--title-size) * -0.8) !important;
+                top: calc(var(--title-size) * -2.08) !important;
+            }
+
+            /* Galleria: larga quasi quanto lo schermo e leggermente più in alto */
             .works-gallery {
                 position: fixed;
                 left: 3vw;
                 right: 3vw;
-                bottom: 15%;
+                bottom: 17% !important;
                 width: auto;
                 max-width: none;
                 height: 25vh;
                 box-sizing: border-box;
                 display: flex;
                 gap: 4px;
-                justify-content: stretch;
                 align-items: stretch;
             }
 
-            /* Tutti i rettangoli sono uniformi quando non selezionati */
+            /* Rettangoli uniformi quando sono chiusi */
             .works-gallery .work-rectangle,
             .works-gallery:hover .work-rectangle {
                 flex: 1 1 0 !important;
@@ -539,31 +580,24 @@
                 min-width: 0;
             }
 
-            /* Espande il rettangolo sotto il puntatore o selezionato */
+            /* Rettangolo selezionato espanso */
             .works-gallery .work-rectangle:hover,
             .works-gallery .work-rectangle.active {
                 flex: 5 1 0 !important;
             }
 
-            /* Restringe gli altri rettangoli durante la selezione */
+            /* Altri rettangoli più stretti durante la selezione */
             .works-gallery:has(.work-rectangle:hover) .work-rectangle:not(:hover),
             .works-gallery:has(.work-rectangle.active) .work-rectangle:not(.active) {
                 flex: 0.5 1 0 !important;
             }
 
-            /* Titolo ridotto e centrato */
-            .works-title-container {
-                left: 50%;
-                width: max-content;
-                transform: translate(-50%, -50%);
-                --title-size: clamp(70px, 18vw, 110px);
+            /* Frecce della galleria più in basso */
+            .works-controls {
+                bottom: 3% !important;
             }
 
-            #fisherman {
-                left: calc(var(--title-size) * -0.8);
-            }
-
-            /* Fascia blu dietro il menu */
+            /* Fascia blu dietro al menu */
             .mobile-nav-band {
                 display: block;
                 position: fixed;
@@ -576,7 +610,7 @@
                 pointer-events: none;
             }
 
-            /* Nasconde il cursore personalizzato sui dispositivi mobili */
+            /* Cursore personalizzato nascosto su telefono */
             #custom-cursor {
                 display: none !important;
                 visibility: hidden !important;
@@ -584,19 +618,38 @@
                 pointer-events: none !important;
             }
 
-            /* Sposta leggermente verso l'alto il titolo e il pescatore */
-            .works-title-container {
-                top: 43%;
+            /* Contenuto delle sottopagine */
+            .project-page-content {
+                width: 90%;
+                gap: 28px;
+                padding-top: 90px;
+                padding-bottom: 40px;
             }
 
-            /* Sposta la galleria leggermente verso l'alto */
-            .works-gallery {
-                bottom: 17%;
+            #project-page-title {
+                font-size: clamp(32px, 9vw, 60px);
             }
 
-            /* Sposta le frecce di navigazione leggermente verso il basso */
-            .works-controls {
-                bottom: 3%;
+            .project-page-description {
+                font-size: 24px;
+            }
+
+            #close-project-page {
+                top: 10px;
+                right: 10px;
+            }
+
+            .project-page-arrow {
+                width: 36px;
+                font-size: 24px;
+            }
+
+            #prev-project-page {
+                left: 2px;
+            }
+
+            #next-project-page {
+                right: 2px;
             }
         }
     </style>
