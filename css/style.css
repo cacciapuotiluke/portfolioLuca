@@ -1148,7 +1148,7 @@ img {
     content: none !important;
 }
 
-/* Testo decorativo posizionato rispetto al nome */
+/* HOME — 2D ANIMATION / STORYBOARD */
 #scene .hero::before {
     content: "2D ANIMATION  /  STORYBOARD";
     position: absolute;
@@ -1156,7 +1156,7 @@ img {
     left: 140.8px;
     transform: none;
 
-    font-family: 'DM Mono', monospace;
+    font-family: 'Kirang Haerang', cursive;
     font-size: 48px;
     font-weight: 400;
     letter-spacing: 1px;
