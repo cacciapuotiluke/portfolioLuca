@@ -1133,13 +1133,13 @@ img {
 
 /* Mantiene il font originale e le dimensioni definite
    dal sistema di coordinate della scena */
-#scene .name-stack .original-name,
-#scene .name-stack .name-copy {
+#scene .name-stack h1.original-name,
+#scene .name-stack span.name-copy {
     font-family: 'Notable', sans-serif !important;
     font-size: 281.6px !important;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    line-height: 0.8;
+    font-weight: 400 !important;
+    letter-spacing: 0 !important;
+    line-height: 0.8 !important;
     text-transform: uppercase;
 }
 
