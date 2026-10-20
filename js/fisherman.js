@@ -213,6 +213,13 @@ document.addEventListener("DOMContentLoaded", () => {
         animationId = requestAnimationFrame(animate);
     }
 
+        fisherman.addEventListener("pointerdown", (event) => {
+        if (event.pointerType !== "touch") return;
+        if (projectPage?.classList.contains("open")) return;
+
+        playScroll();
+    });
+
     // La rotella attiva FishScroll solo quando la sottopagina è chiusa
     document.addEventListener(
         "wheel",
