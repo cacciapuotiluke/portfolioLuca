@@ -34,9 +34,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const zonaBordo = 4.35;
     const fluidita = 0.06;
 
-    const isWorksPage = !!document.querySelector(".works-title-container");
+    const isWorksPage =
+        !!document.querySelector(".works-title-container");
+
+    const isContactPage =
+        !!document.querySelector(".contact-title-container");
+
+    function isMobileContact() {
+        return isContactPage && window.matchMedia(
+            "(max-width: 600px), (pointer: coarse)"
+        ).matches;
+    }
 
     function aggiornaDimensioni() {
+        if (isMobileContact()) {
+            // Contact mobile: il CSS gestisce direttamente il layout.
+            scale = 1;
+            currentX = 0;
+            currentY = 0;
+            targetX = 0;
+            targetY = 0;
+
+            scene.style.transform = "none";
+            return;
+        }
+
         const isMobile = window.matchMedia(
             "(max-width: 600px), (pointer: coarse)"
         ).matches;
@@ -44,11 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (isWorksPage) {
             scale = 1;
         } else if (isMobile) {
-            // Su telefono, usa la larghezza dello schermo
-            // per evitare che la scena diventi minuscola.
             scale = window.innerWidth / SCENE_WIDTH;
         } else {
-            // Mantiene il comportamento originale su desktop.
             scale = Math.min(
                 window.innerWidth / SCENE_WIDTH,
                 window.innerHeight / SCENE_HEIGHT
@@ -62,8 +81,13 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("orientationchange", aggiornaDimensioni);
 
     document.addEventListener("mousemove", (event) => {
-        // Nessuna parallasse basata sul mouse sui dispositivi touch.
-        if (window.matchMedia("(pointer: coarse)").matches) return;
+        // Nessuna parallasse sui dispositivi touch o nella Contact mobile.
+        if (
+            window.matchMedia("(pointer: coarse)").matches ||
+            isMobileContact()
+        ) {
+            return;
+        }
 
         const x = (event.clientX / window.innerWidth - 0.5) * 2;
         const y = (event.clientY / window.innerHeight - 0.5) * 2;
@@ -78,22 +102,31 @@ document.addEventListener("DOMContentLoaded", () => {
             (Math.abs(y) - (1 - zonaBordo)) / zonaBordo
         );
 
-        targetX = -Math.sign(x) * intensitaX * movimentoMassimo;
-        targetY = -Math.sign(y) * intensitaY * movimentoMassimo;
+        targetX =
+            -Math.sign(x) * intensitaX * movimentoMassimo;
+
+        targetY =
+            -Math.sign(y) * intensitaY * movimentoMassimo;
 
         livelli.forEach(({ elemento, profondita }) => {
             if (!elemento) return;
 
             elemento.style.setProperty(
                 "--parallax-target-x",
-                -Math.sign(x) * intensitaX *
-                    movimentoParallasse * profondita + "px"
+                -Math.sign(x) *
+                    intensitaX *
+                    movimentoParallasse *
+                    profondita +
+                    "px"
             );
 
             elemento.style.setProperty(
                 "--parallax-target-y",
-                -Math.sign(y) * intensitaY *
-                    movimentoParallasse * profondita + "px"
+                -Math.sign(y) *
+                    intensitaY *
+                    movimentoParallasse *
+                    profondita +
+                    "px"
             );
         });
     });
@@ -105,11 +138,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }));
 
     function animate() {
-        currentX += (targetX - currentX) * fluidita;
-        currentY += (targetY - currentY) * fluidita;
+        if (isMobileContact()) {
+            // Impedisce alla scena Contact mobile di tornare minuscola.
+            if (scene.style.transform !== "none") {
+                scene.style.transform = "none";
+            }
+        } else {
+            currentX += (targetX - currentX) * fluidita;
+            currentY += (targetY - currentY) * fluidita;
 
-        scene.style.transform =
-            `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+            scene.style.transform =
+                `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+        }
 
         posizioni.forEach((posizione) => {
             if (!posizione.elemento) return;
