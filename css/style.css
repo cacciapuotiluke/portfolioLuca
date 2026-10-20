@@ -1149,21 +1149,18 @@ img {
 }
 
 /* Testo decorativo posizionato rispetto al nome */
-#scene .name-stack::after {
-    content: "2D ANIMATION / STORYBOARD";
+#scene .hero::before {
+    content: "2D ANIMATION  /  STORYBOARD";
     position: absolute;
-    left: calc(100% + 35px);
-    top: 310px;
+    top: 470px;
+    left: 140.8px;
+    transform: none;
 
     font-family: 'DM Mono', monospace;
     font-size: 48px;
     font-weight: 400;
     letter-spacing: 1px;
-    line-height: 1.2;
     white-space: nowrap;
-
-    color: var(--text);
-    pointer-events: none;
 
     opacity: 0;
     animation: fadeIn 0.8s ease 1.6s both;
