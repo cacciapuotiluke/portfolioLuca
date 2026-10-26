@@ -809,7 +809,7 @@ p.tagline:hover {
 /* Testo decorativo ancorato al titolo */
 
 #scene .name-stack::before {
-    top: -100px;
+    top: -82px;
     left: 0;
     right: auto;
     bottom: auto;
