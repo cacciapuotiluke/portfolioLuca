@@ -599,11 +599,6 @@
                 font-size: 160px !important;
             }
 
-            /* Personaggio */
-            #scene .name-stack #character {
-                scale: 1.75 !important;
-            }
-
             /* Sfondo animato */
             #scene .circle-large {
                 width: 1000px !important;
@@ -626,8 +621,8 @@
             #scene .name-stack .about-me-button {
                 top: 112% !important;
 
-                width: 100px !important;
-                height: 100px !important;
+                width: 250px !important;
+                height: 250px !important;
 
                 aspect-ratio: 1;
                 box-sizing: border-box;
@@ -635,12 +630,12 @@
 
             /* Showreel: prima icona, più a sinistra */
             #scene .name-stack .showreel-button {
-                left: 8% !important;
+                left: 63% !important;
             }
 
             /* About Me: seconda icona, a destra di Showreel */
             #scene .name-stack .about-me-button {
-                left: 42% !important;
+                left: 72% !important;
             }
 
             /* Riduce l'ingombro visivo delle immagini */
@@ -658,8 +653,8 @@
             #scene .hero .tagline {
                 position: relative !important;
 
-                top: 100px !important;
-                left: 0 !important;
+                top: 130px !important;
+                left: -20 !important;
                 right: auto !important;
                 bottom: auto !important;
 
@@ -673,7 +668,36 @@
 
                 z-index: 5;
             }
+
+
+            /* =========================
+            MOBILE - POSIZIONE OMino
+            Coordinate modificabili
+            ========================= */
+
+            @media screen and (max-width: 600px) {
+
+                #scene {
+                    --character-mobile-x: 0px;
+                    --character-mobile-y: 0px;
+                }
+
+                #scene .name-stack #character {
+                    position: absolute !important;
+
+                    /* Posizione relativa al titolo */
+                    left: var(--character-mobile-x) !important;
+                    top: var(--character-mobile-y) !important;
+                    right: auto !important;
+                    bottom: auto !important;
+
+                    scale: 1.75 !important;
+                    transform-origin: top left !important;
+                }
+
+            }
         }
+
 
     </style>
 </head>
