@@ -232,7 +232,7 @@ p.tagline:hover {
 .name-stack::before {
     content: "2D ANIMATION  /  STORYBOARD";
     position: absolute;
-    top: -65px;
+    top: -100px;
     left: 0;
     right: auto;
     bottom: auto;
