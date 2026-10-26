@@ -232,7 +232,7 @@ p.tagline:hover {
 .name-stack::before {
     content: "2D ANIMATION  /  STORYBOARD";
     position: absolute;
-    top: -100px;
+    top: -92px;
     left: 0;
     right: auto;
     bottom: auto;
@@ -809,7 +809,7 @@ p.tagline:hover {
 /* Testo decorativo ancorato al titolo */
 
 #scene .name-stack::before {
-    top: -82px;
+    top: -92px;
     left: 0;
     right: auto;
     bottom: auto;
@@ -953,7 +953,7 @@ p.tagline:hover {
     }
 
     #scene .name-stack::before {
-        top: -100px;
+        top: -92px;
         left: 0;
         font-size: 48px;
     }
