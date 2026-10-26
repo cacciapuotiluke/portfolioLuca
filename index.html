@@ -590,8 +590,8 @@
 
 
         /* =========================
-        MOBILE HOME - ELEMENTI INGRANDITI
-        Solo smartphone: il desktop resta invariato
+           MOBILE HOME - ELEMENTI INGRANDITI
+           Solo smartphone: il desktop resta invariato
         ========================= */
 
         @media screen and (max-width: 600px) {
@@ -602,8 +602,8 @@
                 font-size: 500px !important;
             }
 
-            /* Testo decorativo */
-            #scene .hero::before {
+            /* Testo decorativo generato da .name-stack::before */
+            #scene .hero .name-stack::before {
                 font-size: 212px !important;
             }
 
@@ -681,7 +681,6 @@
 
 
                     <!-- Personaggio -->
-
                     <div id="character" aria-hidden="true">
 
                         <div class="part leg-left-upper">
@@ -732,7 +731,6 @@
 
 
                     <!-- Icona animata Showreel -->
-
                     <button
                         class="showreel-button"
                         id="showreel-trigger"
@@ -750,7 +748,6 @@
 
 
                     <!-- Icona animata About Me -->
-
                     <button
                         class="about-me-button"
                         id="about-me-trigger"
@@ -792,7 +789,6 @@
 
 
     <!-- Navigazione -->
-
     <nav class="navigation">
         <a href="index.html">HOME</a>
         <a href="works.html">WORKS</a>
@@ -850,7 +846,6 @@
             </div>
 
             <!-- Tre foto circolari sovrapposte -->
-
             <div class="about-photos" aria-label="Photos of Luca">
 
                 <div class="about-photo-card about-photo-1">
@@ -908,12 +903,10 @@
 
 
     <!-- Cursore personalizzato -->
-
     <div id="custom-cursor" aria-hidden="true">✳</div>
 
 
     <!-- Script -->
-
     <script src="js/character.js"></script>
 
     <script>
@@ -922,7 +915,6 @@
         const rootStyle = getComputedStyle(document.documentElement);
 
         /* Animazione dei cerchi */
-
         const cerchi = [
             {
                 elemento: document.querySelector(".circle-large"),
@@ -1000,7 +992,6 @@
 
 
         /* Animazione ciclica delle icone Showreel e About Me */
-
         const animateIconFrames = (buttonSelector, frameClass) => {
             const button = document.querySelector(buttonSelector);
             if (!button) return;
@@ -1080,7 +1071,7 @@
 
                 showreelButton.setAttribute("aria-expanded", "false");
 
-                /* Interrompe il video quando si chiude il miniplayer */
+                /* Interrompe il video quando si chiude */
                 showreelVideo.src = "";
 
                 if (showreelPreviousFocus) {
