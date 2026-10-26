@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -538,15 +539,6 @@
                 font-size: 1.1em !important;
             }
 
-            .about-me-button,
-            .showreel-button {
-                width: clamp(55px, 12vw, 75px) !important;
-            }
-
-            .showreel-button {
-                left: calc(83% + var(--about-me-offset, 30px) - clamp(65px, 12vw, 85px));
-            }
-
             #character {
                 scale: 1.05;
             }
@@ -591,7 +583,7 @@
 
         /* =========================
            MOBILE HOME - ELEMENTI INGRANDITI
-           Solo smartphone: il desktop resta invariato
+           Solo smartphone
         ========================= */
 
         @media screen and (max-width: 600px) {
@@ -602,26 +594,14 @@
                 font-size: 500px !important;
             }
 
-            /* Testo decorativo generato da .name-stack::before */
+            /* Testo decorativo */
             #scene .hero .name-stack::before {
                 font-size: 160px !important;
             }
 
-            /* Tagline */
-            #scene .tagline {
-                font-size: 110px !important;
-                max-width: 520px !important;
-            }
-
-            /* Icone About Me e Showreel */
-            #scene .about-me-button,
-            #scene .showreel-button {
-                width: 215px !important;
-            }
-
             /* Personaggio */
             #scene .name-stack #character {
-                scale: 1.85 !important;
+                scale: 1.75 !important;
             }
 
             /* Sfondo animato */
@@ -635,6 +615,63 @@
 
             #scene .circle-small {
                 width: 700px !important;
+            }
+
+            /* -------------------------
+               SHOWREEL E ABOUT ME
+               Disposti orizzontalmente
+            ------------------------- */
+
+            #scene .name-stack .showreel-button,
+            #scene .name-stack .about-me-button {
+                top: 112% !important;
+
+                width: 100px !important;
+                height: 100px !important;
+
+                aspect-ratio: 1;
+                box-sizing: border-box;
+            }
+
+            /* Showreel: prima icona, più a sinistra */
+            #scene .name-stack .showreel-button {
+                left: 8% !important;
+            }
+
+            /* About Me: seconda icona, a destra di Showreel */
+            #scene .name-stack .about-me-button {
+                left: 42% !important;
+            }
+
+            /* Riduce l'ingombro visivo delle immagini */
+            #scene .name-stack .showreel-button img,
+            #scene .name-stack .about-me-button img {
+                width: 145% !important;
+                height: 145% !important;
+            }
+
+            /* -------------------------
+               TAGLINE
+               Spostata più in basso
+            ------------------------- */
+
+            #scene .hero .tagline {
+                position: relative !important;
+
+                top: 100px !important;
+                left: 0 !important;
+                right: auto !important;
+                bottom: auto !important;
+
+                width: max-content !important;
+                max-width: 90vw !important;
+
+                margin: 0 !important;
+
+                font-size: 110px !important;
+                line-height: 1.05 !important;
+
+                z-index: 5;
             }
         }
 
@@ -664,17 +701,14 @@
 
                 <div class="name-stack">
 
-                    <!-- Titolo principale -->
                     <h1 class="original-name">
                         LUCA<br><span class="surname">CACCIA<br class="mobile-break">PUOTI</span>
                     </h1>
 
-                    <!-- Copia animata 1 -->
                     <span class="name-copy copy-3" aria-hidden="true">
                         LUCA<br><span class="surname">CACCIA<br class="mobile-break">PUOTI</span>
                     </span>
 
-                    <!-- Copia animata 2 -->
                     <span class="name-copy copy-4" aria-hidden="true">
                         LUCA<br><span class="surname">CACCIA<br class="mobile-break">PUOTI</span>
                     </span>
@@ -685,7 +719,6 @@
 
                         <div class="part leg-left-upper">
                             <img src="assets/CH/Up_Leg_SX.png" alt="">
-
                             <div class="part leg-left-lower">
                                 <img src="assets/CH/Low_Leg_SX.png" alt="">
                             </div>
@@ -693,7 +726,6 @@
 
                         <div class="part leg-right-upper">
                             <img src="assets/CH/Up_Leg_DX.png" alt="">
-
                             <div class="part leg-right-lower">
                                 <img src="assets/CH/Low_Leg_DX.png" alt="">
                             </div>
@@ -705,7 +737,6 @@
 
                         <div class="part arm-left-upper">
                             <img src="assets/CH/Up_Arm_SX.png" alt="">
-
                             <div class="part arm-left-lower">
                                 <img src="assets/CH/Low_Arm_SX.png" alt="">
                             </div>
@@ -713,7 +744,6 @@
 
                         <div class="part arm-right-upper">
                             <img src="assets/CH/Up_Arm_DX.png" alt="">
-
                             <div class="part arm-right-lower">
                                 <img src="assets/CH/Low_Arm_DX.png" alt="">
                             </div>
@@ -796,10 +826,7 @@
     </nav>
 
 
-    <!-- =========================
-         OVERLAY ABOUT ME
-    ========================= -->
-
+    <!-- OVERLAY ABOUT ME -->
     <div
         class="about-overlay"
         id="about-overlay"
@@ -845,7 +872,6 @@
 
             </div>
 
-            <!-- Tre foto circolari sovrapposte -->
             <div class="about-photos" aria-label="Photos of Luca">
 
                 <div class="about-photo-card about-photo-1">
@@ -866,10 +892,7 @@
     </div>
 
 
-    <!-- =========================
-         OVERLAY SHOWREEL
-    ========================= -->
-
+    <!-- OVERLAY SHOWREEL -->
     <div
         class="showreel-overlay"
         id="showreel-overlay"
@@ -991,7 +1014,7 @@
         });
 
 
-        /* Animazione ciclica delle icone Showreel e About Me */
+        /* Animazione ciclica delle icone */
         const animateIconFrames = (buttonSelector, frameClass) => {
             const button = document.querySelector(buttonSelector);
             if (!button) return;
@@ -1054,7 +1077,6 @@
 
                 showreelButton.setAttribute("aria-expanded", "true");
 
-                /* Carica il video quando si apre il miniplayer */
                 showreelVideo.src = showreelVideo.dataset.src;
 
                 showreelClose.focus();
@@ -1071,7 +1093,6 @@
 
                 showreelButton.setAttribute("aria-expanded", "false");
 
-                /* Interrompe il video quando si chiude */
                 showreelVideo.src = "";
 
                 if (showreelPreviousFocus) {
@@ -1082,14 +1103,12 @@
             showreelButton.addEventListener("click", openShowreel);
             showreelClose.addEventListener("click", closeShowreel);
 
-            /* Chiude cliccando sullo sfondo */
             showreelOverlay.addEventListener("click", event => {
                 if (event.target === showreelOverlay) {
                     closeShowreel();
                 }
             });
 
-            /* Chiude premendo Esc */
             document.addEventListener("keydown", event => {
                 if (
                     event.key === "Escape" &&
@@ -1099,7 +1118,6 @@
                 }
             });
 
-            /* Mantiene il focus sul pulsante di chiusura */
             showreelOverlay.addEventListener("keydown", event => {
                 if (event.key !== "Tab") return;
 
@@ -1153,14 +1171,12 @@
             aboutButton.addEventListener("click", openOverlay);
             closeButton.addEventListener("click", closeOverlay);
 
-            /* Chiude cliccando sullo sfondo */
             overlay.addEventListener("click", event => {
                 if (event.target === overlay) {
                     closeOverlay();
                 }
             });
 
-            /* Chiude con Esc */
             document.addEventListener("keydown", event => {
                 if (
                     event.key === "Escape" &&
@@ -1170,7 +1186,6 @@
                 }
             });
 
-            /* Mantiene il focus all'interno della finestra */
             overlay.addEventListener("keydown", event => {
                 if (event.key !== "Tab") return;
 
