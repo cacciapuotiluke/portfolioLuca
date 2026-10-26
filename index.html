@@ -587,6 +587,57 @@
                 transition: none;
             }
         }
+
+
+        /* =========================
+        MOBILE HOME - ELEMENTI INGRANDITI
+        Solo smartphone: il desktop resta invariato
+        ========================= */
+
+        @media screen and (max-width: 600px) {
+
+            /* Titolo principale e copie animate */
+            #scene .name-stack h1.original-name,
+            #scene .name-stack span.name-copy {
+                font-size: 350px !important;
+            }
+
+            /* Testo decorativo */
+            #scene .hero::before {
+                font-size: 62px !important;
+            }
+
+            /* Tagline */
+            #scene .tagline {
+                font-size: 56px !important;
+                max-width: 420px !important;
+            }
+
+            /* Icone About Me e Showreel */
+            #scene .about-me-button,
+            #scene .showreel-button {
+                width: 95px !important;
+            }
+
+            /* Personaggio */
+            #scene .name-stack #character {
+                scale: 1.3 !important;
+            }
+
+            /* Sfondo animato */
+            #scene .circle-large {
+                width: 900px !important;
+            }
+
+            #scene .circle-medium {
+                width: 840px !important;
+            }
+
+            #scene .circle-small {
+                width: 620px !important;
+            }
+        }
+
     </style>
 </head>
 
