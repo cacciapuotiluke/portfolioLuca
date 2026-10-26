@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Notable&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kirang+Haerang&display=swap');
@@ -115,6 +114,7 @@ body {
     from {
         transform: translate(-8px, 8px);
     }
+
     to {
         transform: translate(0, 0);
     }
@@ -171,6 +171,7 @@ body {
     from {
         opacity: 0;
     }
+
     to {
         opacity: var(--copy-opacity);
     }
@@ -180,6 +181,7 @@ body {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -224,17 +226,22 @@ p.tagline:hover {
 
 /* ==============================
    TESTO DECORATIVO
+   Posizionato rispetto al titolo
    ============================== */
 
-.hero::before {
+.name-stack::before {
     content: "2D ANIMATION  /  STORYBOARD";
     position: absolute;
-    top: 470px;
-    left: 5.5%;
+    top: -65px;
+    left: 0;
+    right: auto;
+    bottom: auto;
+    transform: none;
     font-family: 'Kirang Haerang', cursive;
     font-size: 48px;
     font-weight: 400;
     letter-spacing: 1px;
+    line-height: normal;
     white-space: nowrap;
     opacity: 0;
     animation: fadeIn 0.8s ease 1.6s both;
@@ -256,6 +263,7 @@ p.tagline:hover {
     from {
         background-color: transparent;
     }
+
     to {
         background-color: var(--background);
     }
@@ -265,6 +273,7 @@ p.tagline:hover {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -275,6 +284,7 @@ p.tagline:hover {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -285,6 +295,7 @@ p.tagline:hover {
     from {
         transform: scaleX(0);
     }
+
     to {
         transform: scaleX(1);
     }
@@ -441,18 +452,33 @@ p.tagline:hover {
 /* Rotazioni */
 
 @keyframes rotateLarge {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(-360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg);
+    }
 }
 
 @keyframes rotateMedium {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes rotateSmall {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes revealSmallCircle {
@@ -573,6 +599,7 @@ p.tagline:hover {
         opacity: 0;
         visibility: hidden;
     }
+
     to {
         opacity: 1;
         visibility: visible;
@@ -622,13 +649,23 @@ p.tagline:hover {
 }
 
 @keyframes cursor-gradient {
-    from { background-position: 0% 50%; }
-    to { background-position: 300% 50%; }
+    from {
+        background-position: 0% 50%;
+    }
+
+    to {
+        background-position: 300% 50%;
+    }
 }
 
 @keyframes cursor-spin {
-    from { rotate: 0deg; }
-    to { rotate: 360deg; }
+    from {
+        rotate: 0deg;
+    }
+
+    to {
+        rotate: 360deg;
+    }
 }
 
 /* ==============================
@@ -678,17 +715,29 @@ p.tagline:hover {
 }
 
 @keyframes scrollPromptFade {
-    to { opacity: 1; }
+    to {
+        opacity: 1;
+    }
 }
 
 @keyframes frameOne {
-    0%, 49.9% { opacity: 1; }
-    50%, 100% { opacity: 0; }
+    0%, 49.9% {
+        opacity: 1;
+    }
+
+    50%, 100% {
+        opacity: 0;
+    }
 }
 
 @keyframes frameTwo {
-    0%, 49.9% { opacity: 0; }
-    50%, 100% { opacity: 1; }
+    0%, 49.9% {
+        opacity: 0;
+    }
+
+    50%, 100% {
+        opacity: 1;
+    }
 }
 
 /* ==============================
@@ -757,24 +806,15 @@ p.tagline:hover {
     text-transform: uppercase;
 }
 
-/* Testo decorativo della scena: regola unica */
+/* Testo decorativo ancorato al titolo */
 
-#scene .hero::before {
-    content: "2D ANIMATION  /  STORYBOARD";
-    position: absolute;
-    top: 39.55%;
-    left: 5.5%;
+#scene .name-stack::before {
+    top: -65px;
+    left: 0;
     right: auto;
     bottom: auto;
-    transform: none;
     font-family: 'Kirang Haerang', cursive;
     font-size: 48px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    line-height: normal;
-    white-space: nowrap;
-    opacity: 0;
-    animation: fadeIn 0.8s ease 1.6s both;
 }
 
 /* Sottotitolo nella scena */
@@ -884,11 +924,6 @@ p.tagline:hover {
         margin-left: 5px;
     }
 
-    .hero::before {
-        top: 100px;
-        font-size: 16px;
-    }
-
     .hero::after {
         bottom: 60px;
     }
@@ -917,10 +952,9 @@ p.tagline:hover {
         margin-left: 0;
     }
 
-    #scene .hero::before {
-        top: 470px;
-        left: 140.8px;
-        font-family: 'Kirang Haerang', cursive;
+    #scene .name-stack::before {
+        top: -65px;
+        left: 0;
         font-size: 48px;
     }
 
@@ -938,7 +972,7 @@ p.tagline:hover {
     .hero h1,
     .tagline,
     .navigation,
-    .hero::before,
+    .name-stack::before,
     .hero::after {
         animation: none;
         opacity: 1;
