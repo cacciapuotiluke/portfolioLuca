@@ -324,7 +324,8 @@
             position: absolute;
             box-sizing: border-box;
 
-            width: 62%;
+            /* Cerchi leggermente più piccoli */
+            width: 58%;
             aspect-ratio: 1;
             padding: 0;
 
@@ -372,22 +373,25 @@
             top: calc(60% + 10px) !important;
         }
 
+        /* Cerchio 1: leggermente più in basso */
         .about-photo-1 {
-            top: -20%;
+            top: -15%;
             left: -10%;
             rotate: -8deg;
             z-index: 1;
         }
 
+        /* Cerchio 2: leggermente più in basso */
         .about-photo-2 {
-            top: 8%;
+            top: 13%;
             left: 49%;
             rotate: 6deg;
             z-index: 3;
         }
 
+        /* Cerchio 3: leggermente più in basso */
         .about-photo-3 {
-            top: 58%;
+            top: 63%;
             left: 4%;
             rotate: -3deg;
             z-index: 2;
@@ -441,7 +445,7 @@
             }
 
             .about-photo-card {
-                width: 62%;
+                width: 58%;
                 height: auto;
                 aspect-ratio: 1;
                 padding: 0;
@@ -535,8 +539,6 @@
         }
 
 
-        /* Interruzione del cognome disattivata su desktop */
-
         .mobile-break {
             display: none;
         }
@@ -599,30 +601,21 @@
                 width: 700px !important;
             }
 
-            /* -------------------------
-               POSIZIONE INIZIALE DEI CERCHI
-               Modificabile solo da mobile
-            ------------------------- */
-
+            /* Posizione iniziale dei cerchi, solo mobile */
             .circles-background .entry-large {
                 translate: -1050px 0;
             }
 
             .circles-background .entry-medium {
-                translate: -950px -1130px;
+                translate: 3950px -1130px;
             }
 
-            /* -------------------------
-               SHOWREEL E ABOUT ME
-            ------------------------- */
-
+            /* Showreel e About Me */
             #scene .name-stack .showreel-button,
             #scene .name-stack .about-me-button {
                 top: 112% !important;
-
                 width: 250px !important;
                 height: 250px !important;
-
                 aspect-ratio: 1;
                 box-sizing: border-box;
             }
@@ -641,13 +634,9 @@
                 height: 145% !important;
             }
 
-            /* -------------------------
-               TAGLINE
-            ------------------------- */
-
+            /* Tagline */
             #scene .hero .tagline {
                 position: relative !important;
-
                 top: 550px !important;
                 left: -200px !important;
                 right: auto !important;
@@ -655,21 +644,14 @@
 
                 width: max-content !important;
                 max-width: 90vw !important;
-
                 margin: 0 !important;
 
                 font-size: 110px !important;
                 line-height: 1.05 !important;
-
                 z-index: 5;
             }
 
-            /* -------------------------
-               PERSONAGGIO - POSIZIONE MOBILE
-               Questi valori sono aggiornati
-               anche durante il trascinamento
-            ------------------------- */
-
+            /* Personaggio: posizione iniziale mobile */
             #scene {
                 --character-mobile-x: 1450px;
                 --character-mobile-y: 685px;
@@ -686,7 +668,6 @@
                 scale: 1.75 !important;
                 transform-origin: top left !important;
 
-                /* Permette di trascinare il personaggio col dito */
                 touch-action: none;
                 user-select: none;
                 -webkit-user-select: none;
@@ -743,7 +724,6 @@
                         LUCA<br><span class="surname">CACCIA<br class="mobile-break">PUOTI</span>
                     </span>
 
-
                     <!-- Personaggio -->
                     <div id="character" aria-hidden="true">
 
@@ -789,7 +769,6 @@
 
                     </div>
 
-
                     <!-- Icona animata Showreel -->
                     <button
                         class="showreel-button"
@@ -805,7 +784,6 @@
                         <img src="images/SR2.webp" alt="" class="showreel-frame-2">
                         <img src="images/SR3.webp" alt="" class="showreel-frame-3">
                     </button>
-
 
                     <!-- Icona animata About Me -->
                     <button
@@ -825,19 +803,9 @@
 
                 </div>
 
-
                 <div class="scroll-prompt" aria-hidden="true">
-                    <img
-                        src="assets/Scroll/Frame_1.webp"
-                        alt=""
-                        class="scroll-frame frame-one"
-                    >
-
-                    <img
-                        src="assets/Scroll/Frame_2.webp"
-                        alt=""
-                        class="scroll-frame frame-two"
-                    >
+                    <img src="assets/Scroll/Frame_1.webp" alt="" class="scroll-frame frame-one">
+                    <img src="assets/Scroll/Frame_2.webp" alt="" class="scroll-frame frame-two">
                 </div>
 
                 <p class="tagline">I make drawings do stuff</p>
@@ -847,7 +815,6 @@
         </div>
     </div>
 
-
     <!-- Navigazione -->
     <nav class="navigation">
         <a href="index.html">HOME</a>
@@ -855,32 +822,14 @@
         <a href="contact.html">CONTACT ME</a>
     </nav>
 
-
     <!-- OVERLAY ABOUT ME -->
-    <div
-        class="about-overlay"
-        id="about-overlay"
-        aria-hidden="true"
-        inert
-    >
-        <section
-            class="about-panel"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="about-title"
-        >
+    <div class="about-overlay" id="about-overlay" aria-hidden="true" inert>
+        <section class="about-panel" role="dialog" aria-modal="true" aria-labelledby="about-title">
 
-            <button
-                class="about-close"
-                id="about-close"
-                type="button"
-                aria-label="Close About Me"
-            >&times;</button>
+            <button class="about-close" id="about-close" type="button" aria-label="Close About Me">&times;</button>
 
             <div class="about-copy">
-
                 <p class="about-eyebrow">A brief introduction</p>
-
                 <h2 id="about-title">Hi! Name's<br>Luca.</h2>
 
                 <p>
@@ -899,11 +848,9 @@
                     and animatics, always putting storytelling and expressive action
                     front and center.
                 </p>
-
             </div>
 
             <div class="about-photos" aria-label="Photos of Luca">
-
                 <div class="about-photo-card about-photo-1">
                     <img src="images/Me-1.webp" alt="Luca">
                 </div>
@@ -915,32 +862,15 @@
                 <div class="about-photo-card about-photo-3">
                     <img src="images/Me-3.webp" alt="Luca">
                 </div>
-
             </div>
 
         </section>
     </div>
 
-
     <!-- OVERLAY SHOWREEL -->
-    <div
-        class="showreel-overlay"
-        id="showreel-overlay"
-        aria-hidden="true"
-        inert
-    >
-        <section
-            class="showreel-player"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Showreel video player"
-        >
-            <button
-                class="showreel-close"
-                id="showreel-close"
-                type="button"
-                aria-label="Close showreel"
-            >&times;</button>
+    <div class="showreel-overlay" id="showreel-overlay" aria-hidden="true" inert>
+        <section class="showreel-player" role="dialog" aria-modal="true" aria-label="Showreel video player">
+            <button class="showreel-close" id="showreel-close" type="button" aria-label="Close showreel">&times;</button>
 
             <iframe
                 id="showreel-video"
@@ -954,10 +884,8 @@
         </section>
     </div>
 
-
     <!-- Cursore personalizzato -->
     <div id="custom-cursor" aria-hidden="true">✳</div>
-
 
     <!-- Script personaggio esistente -->
     <script src="js/character.js"></script>
@@ -996,10 +924,7 @@
         ];
 
         const leggiMs = variabile => {
-            const valore = rootStyle
-                .getPropertyValue(variabile)
-                .trim();
-
+            const valore = rootStyle.getPropertyValue(variabile).trim();
             const numero = parseFloat(valore);
 
             if (!Number.isFinite(numero)) return 0;
@@ -1009,13 +934,7 @@
             return 0;
         };
 
-        cerchi.forEach(({
-            elemento,
-            rotazione,
-            timer,
-            ritardo,
-            animazione
-        }) => {
+        cerchi.forEach(({ elemento, rotazione, timer, ritardo, animazione }) => {
 
             if (!elemento) return;
 
@@ -1023,9 +942,7 @@
             const intervalloRiavvio = leggiMs(timer);
             const ritardoIniziale = leggiMs(ritardo);
 
-            if (durataRotazione <= 0 || intervalloRiavvio <= 0) {
-                return;
-            }
+            if (durataRotazione <= 0 || intervalloRiavvio <= 0) return;
 
             elemento.style.animation = "none";
 
@@ -1040,7 +957,6 @@
                 };
 
                 avviaRotazione();
-
                 setInterval(avviaRotazione, intervalloRiavvio);
 
             }, ritardoIniziale);
@@ -1064,16 +980,13 @@
             let currentFrame = 0;
 
             frames.forEach((frame, index) => {
-                if (frame) {
-                    frame.style.opacity = index === 0 ? "1" : "0";
-                }
+                if (frame) frame.style.opacity = index === 0 ? "1" : "0";
             });
 
             setInterval(() => {
                 frames.forEach((frame, index) => {
                     if (frame) {
-                        frame.style.opacity =
-                            index === currentFrame ? "1" : "0";
+                        frame.style.opacity = index === currentFrame ? "1" : "0";
                     }
                 });
 
@@ -1115,10 +1028,7 @@
 
             character.addEventListener("pointerdown", event => {
 
-                /* Non modificare il comportamento del desktop */
-                if (!mobileQuery.matches || event.pointerType !== "touch") {
-                    return;
-                }
+                if (!mobileQuery.matches || event.pointerType !== "touch") return;
 
                 event.preventDefault();
 
@@ -1128,15 +1038,8 @@
                 startPointerX = event.clientX;
                 startPointerY = event.clientY;
 
-                startCharacterX = readCoordinate(
-                    "--character-mobile-x",
-                    1450
-                );
-
-                startCharacterY = readCoordinate(
-                    "--character-mobile-y",
-                    685
-                );
+                startCharacterX = readCoordinate("--character-mobile-x", 1450);
+                startCharacterY = readCoordinate("--character-mobile-y", 685);
 
                 character.classList.add("is-dragging");
 
@@ -1149,9 +1052,7 @@
 
             character.addEventListener("pointermove", event => {
 
-                if (!dragging || event.pointerId !== pointerId) {
-                    return;
-                }
+                if (!dragging || event.pointerId !== pointerId) return;
 
                 event.preventDefault();
 
@@ -1173,11 +1074,7 @@
 
                 if (!dragging) return;
 
-                if (
-                    event &&
-                    pointerId !== null &&
-                    event.pointerId !== pointerId
-                ) {
+                if (event && pointerId !== null && event.pointerId !== pointerId) {
                     return;
                 }
 
@@ -1189,6 +1086,7 @@
 
             character.addEventListener("pointerup", stopDragging);
             character.addEventListener("pointercancel", stopDragging);
+
             character.addEventListener("lostpointercapture", () => {
                 dragging = false;
                 pointerId = null;
@@ -1207,13 +1105,8 @@
         const showreelClose = document.querySelector("#showreel-close");
         const showreelVideo = document.querySelector("#showreel-video");
 
-        if (
-            showreelButton &&
-            showreelOverlay &&
-            showreelPlayer &&
-            showreelClose &&
-            showreelVideo
-        ) {
+        if (showreelButton && showreelOverlay && showreelPlayer && showreelClose && showreelVideo) {
+
             let showreelPreviousFocus = null;
 
             const openShowreel = () => {
@@ -1224,44 +1117,33 @@
                 showreelOverlay.classList.add("is-open");
 
                 showreelButton.setAttribute("aria-expanded", "true");
-
                 showreelVideo.src = showreelVideo.dataset.src;
 
                 showreelClose.focus();
             };
 
             const closeShowreel = () => {
-                if (!showreelOverlay.classList.contains("is-open")) {
-                    return;
-                }
+                if (!showreelOverlay.classList.contains("is-open")) return;
 
                 showreelOverlay.classList.remove("is-open");
                 showreelOverlay.setAttribute("aria-hidden", "true");
                 showreelOverlay.inert = true;
 
                 showreelButton.setAttribute("aria-expanded", "false");
-
                 showreelVideo.src = "";
 
-                if (showreelPreviousFocus) {
-                    showreelPreviousFocus.focus();
-                }
+                if (showreelPreviousFocus) showreelPreviousFocus.focus();
             };
 
             showreelButton.addEventListener("click", openShowreel);
             showreelClose.addEventListener("click", closeShowreel);
 
             showreelOverlay.addEventListener("click", event => {
-                if (event.target === showreelOverlay) {
-                    closeShowreel();
-                }
+                if (event.target === showreelOverlay) closeShowreel();
             });
 
             document.addEventListener("keydown", event => {
-                if (
-                    event.key === "Escape" &&
-                    showreelOverlay.classList.contains("is-open")
-                ) {
+                if (event.key === "Escape" && showreelOverlay.classList.contains("is-open")) {
                     closeShowreel();
                 }
             });
@@ -1296,14 +1178,11 @@
                 overlay.classList.add("is-open");
 
                 aboutButton.setAttribute("aria-expanded", "true");
-
                 closeButton.focus();
             };
 
             const closeOverlay = () => {
-                if (!overlay.classList.contains("is-open")) {
-                    return;
-                }
+                if (!overlay.classList.contains("is-open")) return;
 
                 overlay.classList.remove("is-open");
                 overlay.setAttribute("aria-hidden", "true");
@@ -1311,25 +1190,18 @@
 
                 aboutButton.setAttribute("aria-expanded", "false");
 
-                if (previousFocus) {
-                    previousFocus.focus();
-                }
+                if (previousFocus) previousFocus.focus();
             };
 
             aboutButton.addEventListener("click", openOverlay);
             closeButton.addEventListener("click", closeOverlay);
 
             overlay.addEventListener("click", event => {
-                if (event.target === overlay) {
-                    closeOverlay();
-                }
+                if (event.target === overlay) closeOverlay();
             });
 
             document.addEventListener("keydown", event => {
-                if (
-                    event.key === "Escape" &&
-                    overlay.classList.contains("is-open")
-                ) {
+                if (event.key === "Escape" && overlay.classList.contains("is-open")) {
                     closeOverlay();
                 }
             });
@@ -1348,17 +1220,10 @@
                 const first = focusable[0];
                 const last = focusable[focusable.length - 1];
 
-                if (
-                    event.shiftKey &&
-                    document.activeElement === first
-                ) {
+                if (event.shiftKey && document.activeElement === first) {
                     event.preventDefault();
                     last.focus();
-
-                } else if (
-                    !event.shiftKey &&
-                    document.activeElement === last
-                ) {
+                } else if (!event.shiftKey && document.activeElement === last) {
                     event.preventDefault();
                     first.focus();
                 }
