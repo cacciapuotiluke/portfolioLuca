@@ -473,13 +473,7 @@
 
         @media screen and (max-width: 600px) {
 
-            .scroll-prompt {
-                display: none !important;
-                visibility: hidden !important;
-                opacity: 0 !important;
-                pointer-events: none !important;
-            }
-
+            .scroll-prompt,
             #custom-cursor {
                 display: none !important;
                 visibility: hidden !important;
@@ -538,10 +532,6 @@
             .hero .tagline {
                 font-size: 1.1em !important;
             }
-
-            #character {
-                scale: 1.05;
-            }
         }
 
 
@@ -588,18 +578,15 @@
 
         @media screen and (max-width: 600px) {
 
-            /* Titolo principale e copie animate */
             #scene .name-stack h1.original-name,
             #scene .name-stack span.name-copy {
                 font-size: 500px !important;
             }
 
-            /* Testo decorativo */
             #scene .hero .name-stack::before {
                 font-size: 160px !important;
             }
 
-            /* Sfondo animato */
             #scene .circle-large {
                 width: 1000px !important;
             }
@@ -613,8 +600,20 @@
             }
 
             /* -------------------------
+               POSIZIONE INIZIALE DEI CERCHI
+               Modificabile solo da mobile
+            ------------------------- */
+
+            .circles-background .entry-large {
+                translate: -100px 0;
+            }
+
+            .circles-background .entry-medium {
+                translate: -100px -80px;
+            }
+
+            /* -------------------------
                SHOWREEL E ABOUT ME
-               Disposti orizzontalmente
             ------------------------- */
 
             #scene .name-stack .showreel-button,
@@ -628,17 +627,14 @@
                 box-sizing: border-box;
             }
 
-            /* Showreel: prima icona, più a sinistra */
             #scene .name-stack .showreel-button {
                 left: 55% !important;
             }
 
-            /* About Me: seconda icona, a destra di Showreel */
             #scene .name-stack .about-me-button {
                 left: 69.5% !important;
             }
 
-            /* Riduce l'ingombro visivo delle immagini */
             #scene .name-stack .showreel-button img,
             #scene .name-stack .about-me-button img {
                 width: 145% !important;
@@ -647,7 +643,6 @@
 
             /* -------------------------
                TAGLINE
-               Spostata più in basso
             ------------------------- */
 
             #scene .hero .tagline {
@@ -669,35 +664,46 @@
                 z-index: 5;
             }
 
+            /* -------------------------
+               PERSONAGGIO - POSIZIONE MOBILE
+               Questi valori sono aggiornati
+               anche durante il trascinamento
+            ------------------------- */
 
-            /* =========================
-            MOBILE - POSIZIONE OMino
-            Coordinate modificabili
-            ========================= */
+            #scene {
+                --character-mobile-x: 1450px;
+                --character-mobile-y: 685px;
+            }
 
-            @media screen and (max-width: 600px) {
+            #scene .name-stack #character {
+                position: absolute !important;
 
-                #scene {
-                    --character-mobile-x: 1450px;
-                    --character-mobile-y: 685px;
-                }
+                left: var(--character-mobile-x) !important;
+                top: var(--character-mobile-y) !important;
+                right: auto !important;
+                bottom: auto !important;
 
-                #scene .name-stack #character {
-                    position: absolute !important;
+                scale: 1.75 !important;
+                transform-origin: top left !important;
 
-                    /* Posizione relativa al titolo */
-                    left: var(--character-mobile-x) !important;
-                    top: var(--character-mobile-y) !important;
-                    right: auto !important;
-                    bottom: auto !important;
+                /* Permette di trascinare il personaggio col dito */
+                touch-action: none;
+                user-select: none;
+                -webkit-user-select: none;
+                -webkit-user-drag: none;
+                cursor: grab;
+            }
 
-                    scale: 1.75 !important;
-                    transform-origin: top left !important;
-                }
+            #scene .name-stack #character img {
+                -webkit-user-drag: none;
+                user-select: none;
+                -webkit-user-select: none;
+            }
 
+            #scene .name-stack #character.is-dragging {
+                cursor: grabbing;
             }
         }
-
 
     </style>
 </head>
@@ -953,7 +959,7 @@
     <div id="custom-cursor" aria-hidden="true">✳</div>
 
 
-    <!-- Script -->
+    <!-- Script personaggio esistente -->
     <script src="js/character.js"></script>
 
     <script>
@@ -961,7 +967,10 @@
 
         const rootStyle = getComputedStyle(document.documentElement);
 
-        /* Animazione dei cerchi */
+        /* =========================
+           ANIMAZIONE DEI CERCHI
+        ========================= */
+
         const cerchi = [
             {
                 elemento: document.querySelector(".circle-large"),
@@ -1038,7 +1047,10 @@
         });
 
 
-        /* Animazione ciclica delle icone */
+        /* =========================
+           ANIMAZIONE CICLICA DELLE ICONE
+        ========================= */
+
         const animateIconFrames = (buttonSelector, frameClass) => {
             const button = document.querySelector(buttonSelector);
             if (!button) return;
@@ -1071,6 +1083,118 @@
 
         animateIconFrames("#about-me-trigger", "about-frame");
         animateIconFrames("#showreel-trigger", "showreel-frame");
+
+
+        /* =========================
+           TRASCINAMENTO PERSONAGGIO
+           Solo touch su dispositivi mobili
+        ========================= */
+
+        const character = document.querySelector("#character");
+        const scene = document.querySelector("#scene");
+        const mobileQuery = window.matchMedia("(max-width: 600px)");
+
+        if (character && scene) {
+
+            let dragging = false;
+            let pointerId = null;
+
+            let startPointerX = 0;
+            let startPointerY = 0;
+
+            let startCharacterX = 0;
+            let startCharacterY = 0;
+
+            const readCoordinate = (variable, fallback) => {
+                const value = parseFloat(
+                    getComputedStyle(scene).getPropertyValue(variable)
+                );
+
+                return Number.isFinite(value) ? value : fallback;
+            };
+
+            character.addEventListener("pointerdown", event => {
+
+                /* Non modificare il comportamento del desktop */
+                if (!mobileQuery.matches || event.pointerType !== "touch") {
+                    return;
+                }
+
+                event.preventDefault();
+
+                dragging = true;
+                pointerId = event.pointerId;
+
+                startPointerX = event.clientX;
+                startPointerY = event.clientY;
+
+                startCharacterX = readCoordinate(
+                    "--character-mobile-x",
+                    1450
+                );
+
+                startCharacterY = readCoordinate(
+                    "--character-mobile-y",
+                    685
+                );
+
+                character.classList.add("is-dragging");
+
+                try {
+                    character.setPointerCapture(pointerId);
+                } catch (error) {
+                    /* Il trascinamento continua tramite gli eventi globali */
+                }
+            });
+
+            character.addEventListener("pointermove", event => {
+
+                if (!dragging || event.pointerId !== pointerId) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const deltaX = event.clientX - startPointerX;
+                const deltaY = event.clientY - startPointerY;
+
+                scene.style.setProperty(
+                    "--character-mobile-x",
+                    `${startCharacterX + deltaX}px`
+                );
+
+                scene.style.setProperty(
+                    "--character-mobile-y",
+                    `${startCharacterY + deltaY}px`
+                );
+            });
+
+            const stopDragging = event => {
+
+                if (!dragging) return;
+
+                if (
+                    event &&
+                    pointerId !== null &&
+                    event.pointerId !== pointerId
+                ) {
+                    return;
+                }
+
+                dragging = false;
+                pointerId = null;
+
+                character.classList.remove("is-dragging");
+            };
+
+            character.addEventListener("pointerup", stopDragging);
+            character.addEventListener("pointercancel", stopDragging);
+            character.addEventListener("lostpointercapture", () => {
+                dragging = false;
+                pointerId = null;
+                character.classList.remove("is-dragging");
+            });
+        }
 
 
         /* =========================
