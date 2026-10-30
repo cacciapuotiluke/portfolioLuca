@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
             youtubeId: "drkmc25mc14"
         },
         "Billy the Seed & the Bad Nuts": {
-            description: "Short Stop-Motion film created during my second year at NABA with Giacomo Manzontti, Andrea Montani and Andrea Starace. It parodies the aesthetic of classic western movies, showcasing three different ways to kill nuts. I animated in paperless the peanut dying scene in Harmony and then collaborated on the stop motion animation of all the three scenes using Dragonframe.",
+            description: "Short Stop-Motion film created during my second year at NABA with Giacomo Manzotti, Andrea Montani and Andrea Starace. It parodies the aesthetic of classic western movies, showcasing three different ways to kill nuts. I animated in paperless the peanut dying scene in Harmony and then collaborated on the stop motion animation of all the three scenes using Dragonframe.",
             youtubeId: "cK_U5ItRcHs"
         }
     };
